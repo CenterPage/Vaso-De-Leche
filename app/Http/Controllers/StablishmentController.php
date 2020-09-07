@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Stablishment;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,8 @@ class StablishmentController extends Controller
 
     public function create()
     {
-        return view('stablishments.create');
+        $categories = Category::all();
+        return view('stablishments.create', compact('categories'));
     }
 
     public function store(Request $request)
