@@ -63978,7 +63978,9 @@ var provider = new leaflet_geosearch__WEBPACK_IMPORTED_MODULE_0__["OpenStreetMap
 document.addEventListener('DOMContentLoaded', function () {
   var lat = -5.1995471;
   var lng = -80.6227001;
-  var mapa = L.map('mapa').setView([lat, lng], 16);
+  var mapa = L.map('mapa').setView([lat, lng], 16); // Eliminar pines previos
+
+  var markers = new L.FeatureGroup(mapa);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(mapa);
@@ -63987,27 +63989,33 @@ document.addEventListener('DOMContentLoaded', function () {
   marker = new L.marker([lat, lng], {
     draggable: true,
     autoPan: true
-  }).addTo(mapa); //GeoCode Service
+  }).addTo(mapa); // Agregar el pin a las capas
+
+  markers.addLayer(marker); //GeoCode Service
 
   var geocodeService = L.esri.Geocoding.geocodeService(); // Buscador de direcciones
 
   var buscador = document.querySelector('#location');
-  buscador.addEventListener('blur', buscarDireccion); // Detectar movimiento del marker
+  buscador.addEventListener('blur', buscarDireccion);
+  reubicarPin(marker);
 
-  marker.on('moveend', function (e) {
-    marker = e.target;
-    var posicion = marker.getLatLng(); // console.log(posicion);
-    // Centrar automaticamente
+  function reubicarPin(marker) {
+    // Detectar movimiento del marker
+    marker.on('moveend', function (e) {
+      marker = e.target;
+      var posicion = marker.getLatLng(); // console.log(posicion);
+      // Centrar automaticamente
 
-    mapa.panTo(new L.LatLng(posicion.lat, posicion.lng)); // Reverse Geocoding, cuando el usuario reubica el pin
+      mapa.panTo(new L.LatLng(posicion.lat, posicion.lng)); // Reverse Geocoding, cuando el usuario reubica el pin
 
-    geocodeService.reverse().latlng(posicion, 16).run(function (error, resultado) {
-      // console.log(resultado.address);
-      marker.bindPopup(resultado.address.LongLabel);
-      marker.openPopup();
-      llenarInputs(resultado);
+      geocodeService.reverse().latlng(posicion, 16).run(function (error, resultado) {
+        // console.log(resultado.address);
+        marker.bindPopup(resultado.address.LongLabel);
+        marker.openPopup();
+        llenarInputs(resultado);
+      });
     });
-  });
+  }
 
   function buscarDireccion(e) {
     if (e.target.value.length > 1) {
@@ -64016,11 +64024,24 @@ document.addEventListener('DOMContentLoaded', function () {
       }).then(function (resultado) {
         // console.log(resultado);
         if (resultado[0]) {
-          // Reverse Geocoding, cuando el usuario reubica el pin
+          // Limpiar pines previos
+          markers.clearLayers(); // Reverse Geocoding, cuando el usuario reubica el pin
+
           geocodeService.reverse().latlng(resultado[0].bounds[0], 16).run(function (error, resultado) {
-            console.log(resultado); // marker.bindPopup(resultado.address.LongLabel);
-            // marker.openPopup();
-            // llenarInputs(resultado);
+            // console.log(resultado);
+            // Llenar los inputs
+            llenarInputs(resultado); // Centrar el mapa
+
+            mapa.setView(resultado.latlng); // Agregar el pin
+
+            marker = new L.marker(resultado.latlng, {
+              draggable: true,
+              autoPan: true
+            }).addTo(mapa); // Asignar el contenedor de markers y el nuevo pin
+
+            markers.addLayer(marker); // Mover el pin
+
+            reubicarPin(marker);
           });
         }
       });

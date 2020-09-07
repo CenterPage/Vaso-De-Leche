@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	const mapa = L.map('mapa').setView([lat, lng], 16);
 
+	// Eliminar pines previos
+	let markers = new L.FeatureGroup(mapa);
+
 	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(mapa);
@@ -20,6 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		autoPan: true
 	}).addTo(mapa);
 
+	// Agregar el pin a las capas
+	markers.addLayer(marker);
+
 	//GeoCode Service
 	const geocodeService = L.esri.Geocoding.geocodeService();
 
@@ -27,43 +33,70 @@ document.addEventListener('DOMContentLoaded', () => {
 	const buscador = document.querySelector('#location');
 	buscador.addEventListener('blur', buscarDireccion);
 
-	// Detectar movimiento del marker
-	marker.on('moveend', function(e) {
-		marker = e.target;
+	reubicarPin(marker);
 
-		const posicion = marker.getLatLng();
+	function reubicarPin(marker) {
+		// Detectar movimiento del marker
+		marker.on('moveend', function(e) {
+			marker = e.target;
 
-		// console.log(posicion);
+			const posicion = marker.getLatLng();
 
-		// Centrar automaticamente
-		mapa.panTo( new L.LatLng(posicion.lat, posicion.lng) );
+			// console.log(posicion);
 
-		// Reverse Geocoding, cuando el usuario reubica el pin
-		geocodeService.reverse().latlng(posicion, 16).run(function(error, resultado) {
+			// Centrar automaticamente
+			mapa.panTo( new L.LatLng(posicion.lat, posicion.lng) );
 
-			// console.log(resultado.address);
+			// Reverse Geocoding, cuando el usuario reubica el pin
+			geocodeService.reverse().latlng(posicion, 16).run(function(error, resultado) {
 
-			marker.bindPopup(resultado.address.LongLabel);
-			marker.openPopup();
+				// console.log(resultado.address);
 
-			llenarInputs(resultado);
+				marker.bindPopup(resultado.address.LongLabel);
+				marker.openPopup();
+
+				llenarInputs(resultado);
+			});
+
 		});
-
-	});
+	}
 
 	function buscarDireccion(e) {
+
 		if (e.target.value.length > 1) {
+
 			provider.search( { query: e.target.value + ' Perú ' } )
 				.then(resultado => {
+
 					// console.log(resultado);
+
 					if (resultado[0]) {
+
+						// Limpiar pines previos
+						markers.clearLayers();
+
 						// Reverse Geocoding, cuando el usuario reubica el pin
 						geocodeService.reverse().latlng(resultado[0].bounds[0], 16).run(function(error, resultado) {
-							console.log(resultado);
-							// marker.bindPopup(resultado.address.LongLabel);
-							// marker.openPopup();
+							// console.log(resultado);
 
-							// llenarInputs(resultado);
+							// Llenar los inputs
+							llenarInputs(resultado);
+
+							// Centrar el mapa
+							mapa.setView(resultado.latlng)
+
+							// Agregar el pin
+							marker = new L.marker(resultado.latlng, {
+								draggable: true,	
+								autoPan: true
+							}).addTo(mapa);
+
+							// Asignar el contenedor de markers y el nuevo pin
+							markers.addLayer(marker);
+
+							// Mover el pin
+							reubicarPin(marker);
+
 						});
 					}
 				})
