@@ -4,6 +4,12 @@
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
   crossorigin=""/>
+
+    <!-- Esri Leaflet Geocoder -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css"
+    />
 @endsection
 
 @section('content')
@@ -92,6 +98,24 @@
 						<div id="mapa" style="height: 400px;"></div>
 					</div>
 
+					<p>Confirma que los siguientes campos son los correctos</p>
+
+					<div class="form-group">
+						<label for="address">Dirección</label>
+						<input type="text" id="address" class="form-control @error('name') is-invalid @enderror"
+						placeholder="Av. Las Gardalias"
+						value="{{ old('address') }}">
+
+                        @error('address')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+					</div>
+
+					<input type="hidden" id="latitud" name="latitud" value="{{ old('latitud') }}">
+					<input type="hidden" id="longitud" name="longitud" value="{{ old('longitud') }}">
+
 				</fieldset>
 				
 			</form>
@@ -104,22 +128,10 @@
   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
   crossorigin=""></script>
 
-  <script>
-  	document.addEventListener('DOMContentLoaded', () => {
-  		
-	    const lat = 20.666332695977;
-	    const lng = -103.392177745699;
+  	<!-- Load Esri Leaflet from CDN -->
+	<script src="https://unpkg.com/esri-leaflet" defer></script>
 
-	    const mapa = L.map('mapa').setView([lat, lng], 16);
+    <!-- Esri Leaflet Geocoder -->
+    <script src="https://unpkg.com/esri-leaflet-geocoder" defer></script>
 
-	    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-	        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-	    }).addTo(mapa);
-	 
-	    let marker;
-
-	    // agregar el pin
-	    marker = new L.marker([lat, lng]).addTo(mapa);
-  	});
-  </script>
 @endsection
