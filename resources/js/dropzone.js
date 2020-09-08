@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		Dropzone.autoDiscover = false;
 
 		const dropzone = new Dropzone('div#dropzone', {
-			url: '/images/store',
+			url: '/photos/store',
 			dictDefaultMessage: 'Arrastra tus imagenes',
 			maxFiles: 10,
 			require: true,

@@ -8,7 +8,7 @@ Route::get('/', function () {
 
 Route::resource('stablishments', 'StablishmentController');
 
-Route::post('/images/store', 'ImageController@store')->name('images.store');
+Route::post('/photos/store', 'PhotoController@store')->name('photos.store');
 
 Auth::routes(['verify' => true]);
 

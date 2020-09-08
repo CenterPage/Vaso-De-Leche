@@ -63976,7 +63976,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (document.querySelector('#dropzone')) {
     Dropzone.autoDiscover = false;
     var dropzone = new Dropzone('div#dropzone', {
-      url: '/images/store',
+      url: '/photos/store',
       dictDefaultMessage: 'Arrastra tus imagenes',
       maxFiles: 10,
       require: true,

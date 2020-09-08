@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Imagen;
+use App\Photo;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
-class ImageController extends Controller
+class PhotoController extends Controller
 {
     public function __construct()
     {
@@ -23,9 +23,9 @@ class ImageController extends Controller
     	$image->save();
 
     	// Almacenar con modelo
-    	$imageDB = new Imagen;
-    	$image->id_stablishment = $request['uuid'];
-    	$image->path = $path;
+    	$imageDB = new Photo;
+    	$imageDB->id_stablishment = $request['uuid'];
+    	$imageDB->url = $path;
 
     	$imageDB->save();
 
