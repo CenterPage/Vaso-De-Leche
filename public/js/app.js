@@ -63847,6 +63847,8 @@ var app = new Vue({
 
 __webpack_require__(/*! ./mapa */ "./resources/js/mapa.js");
 
+__webpack_require__(/*! ./dropzone */ "./resources/js/dropzone.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -63960,6 +63962,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/dropzone.js":
+/*!**********************************!*\
+  !*** ./resources/js/dropzone.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+document.addEventListener('DOMContentLoaded', function () {
+  if (document.querySelector('#dropzone')) {
+    Dropzone.autoDiscover = false;
+    var dropzone = new Dropzone('div#dropzone', {
+      url: '/images/store',
+      dictDefaultMessage: 'Arrastra tus imagenes',
+      maxFiles: 10,
+      require: true,
+      acceptedFiles: '.png, .jpg, .gif, .jpeg',
+      headers: {
+        'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
+      },
+      success: function success(file, response) {
+        console.log(response);
+      },
+      sending: function sending(file, xhr, formData) {
+        formData.append('uuid', document.querySelector('#uuid').value); // console.log('xD');
+      }
+    });
+  }
+});
 
 /***/ }),
 

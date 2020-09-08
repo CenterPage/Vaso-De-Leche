@@ -10,6 +10,9 @@
       rel="stylesheet"
       href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css"
     />
+
+    <!-- Dropzone -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" integrity="sha512-3g+prZHHfmnvE1HBLwUnVuunaPOob7dpksI7/v6UnF/rnKGwHf/GdEq9K7iEN7qTtW+S0iivTcGpeTBqqB04wA==" crossorigin="anonymous" />
 @endsection
 
 @section('content')
@@ -117,6 +120,85 @@
 					<input type="hidden" id="longitud" name="longitud" value="{{ old('longitud') }}">
 
 				</fieldset>
+
+				<fieldset class="border p-4 mt-5">
+                	<legend  class="text-primary">Información Establecimiento: </legend>
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input 
+                            type="tel" 
+                            class="form-control @error('phone')  is-invalid  @enderror" 
+                            id="phone" 
+                            placeholder="Teléfono Establecimiento"
+                            name="phone"
+                            value="{{ old('phone') }}"
+                        >
+
+                            @error('phone')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descripcion">Descripción</label>
+                        <textarea
+                            class="form-control  @error('descripcion')  is-invalid  @enderror" 
+                            name="descripcion"
+                        >{{ old('descripcion') }}</textarea>
+
+                            @error('descripcion')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="open">Hora Apertura:</label>
+                        <input 
+                            type="time" 
+                            class="form-control @error('open')  is-invalid  @enderror" 
+                            id="open" 
+                            name="open"
+                            value="{{ old('open') }}"
+                        >
+                        @error('open')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="close">Hora Cierre:</label>
+                        <input 
+                            type="time" 
+                            class="form-control @error('close')  is-invalid  @enderror" 
+                            id="close" 
+                            name="close"
+                            value="{{ old('close') }}"
+                        >
+                        @error('close')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                        @enderror
+                    </div>
+            	</fieldset>
+
+				<fieldset class="border p-4 mt-5">
+                	<legend  class="text-primary">Información Establecimiento: </legend>
+                    <div class="form-group">
+                    	<label for="image">Imagenes</label>
+                    	<div id="dropzone" class="dropzone form-control"></div>
+                    </div>
+                	</legend>
+                </fieldset>
+
+            	<input type="hidden" id="uuid" value="{{ Str::uuid()->toString() }}">
+				<input type="submit" class="btn btn-primary mt-3 d-block" value="Registrar">
 				
 			</form>
 		</div>
@@ -133,5 +215,8 @@
 
     <!-- Esri Leaflet Geocoder -->
     <script src="https://unpkg.com/esri-leaflet-geocoder" defer></script>
+
+    <!-- Dropzone -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js" integrity="sha512-9WciDs0XP20sojTJ9E7mChDXy6pcO0qHpwbEJID1YVavz2H6QBz5eLoDD8lseZOb2yGT8xDNIV7HIe1ZbuiDWg==" crossorigin="anonymous" defer></script>
 
 @endsection
