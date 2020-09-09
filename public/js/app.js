@@ -63981,14 +63981,28 @@ document.addEventListener('DOMContentLoaded', function () {
       maxFiles: 10,
       require: true,
       acceptedFiles: '.png, .jpg, .gif, .jpeg',
+      addRemoveLinks: true,
+      dictRemoveLinks: 'Elininar',
       headers: {
         'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
       },
       success: function success(file, response) {
-        console.log(response);
+        // console.log(response);
+        file.nameServer = response.archivo;
       },
       sending: function sending(file, xhr, formData) {
         formData.append('uuid', document.querySelector('#uuid').value); // console.log('xD');
+      },
+      removedfile: function removedfile(file, response) {
+        // console.log(file);
+        var params = {
+          photo: file.nameServer
+        };
+        axios.post('/photos/destroy', params).then(function (response) {
+          // console.log(response);
+          // Eliminar del DOM
+          file.previewElement.parentNode.removeChild(file.previewElement);
+        });
       }
     });
   }

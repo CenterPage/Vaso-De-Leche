@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 class PhotoController extends Controller
@@ -34,5 +35,36 @@ class PhotoController extends Controller
 
         return response()->json($respuesta);
         
+    }
+
+    public function destroy(Request $request)
+    {
+        $photo = $request->get('photo');
+
+        // $respuesta = [
+        //     'delete-photo' => $photo
+        // ];
+
+        if (File::exists('storage/' . $photo)) {
+            File::delete('storage/' . $photo);
+        }
+
+        $response = [
+            'message' => 'Foto eliminada',
+            'Photo'   => $photo
+        ];
+
+        Photo::where('url', $photo)->delete();
+
+    /***
+    *
+    *   Otra forma de eliminar
+    *
+    *   $deletePhoto = Photo::where('url', $photo)->firstOrFail();
+    *   Photo::destroy($deletePhoto->id);
+    *
+    ***/
+
+        return response()->json($response);
     }
 }
