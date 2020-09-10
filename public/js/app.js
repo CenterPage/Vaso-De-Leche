@@ -64023,8 +64023,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var provider = new leaflet_geosearch__WEBPACK_IMPORTED_MODULE_0__["OpenStreetMapProvider"]();
 document.addEventListener('DOMContentLoaded', function () {
-  var lat = -5.1995471;
-  var lng = -80.6227001;
+  var lat = document.querySelector('#latitud').value === '' ? -5.1995471 : document.querySelector('#latitud').value;
+  var lng = document.querySelector('#latitud').value === '' ? -80.6227001 : document.querySelector('#latitud').value;
   var mapa = L.map('mapa').setView([lat, lng], 16); // Eliminar pines previos
 
   var markers = new L.FeatureGroup(mapa);

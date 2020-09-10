@@ -93,6 +93,7 @@
 						<input name="location"
 							id="location"
 						    class="form-control"
+                            value="{{ old('location') }}" 
 						    placeholder="Av. Loreto número 12" 
 						>
 						<p class="text-center mb-3 text-secondary">El asistente colocará una  dirección estimada, mueve el pin hacía el lugar correcto</p>
