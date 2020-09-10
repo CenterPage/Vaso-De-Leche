@@ -20,7 +20,8 @@
 		<h1 class="text-center ">Registrar Estableciento</h1>
 
 		<div class="mt-5 row justify-content-center">
-			<form action=""
+			<form action="{{ route('stablishments.store') }}"
+                method="POST" enctype="multipart/form-data"
 				class="col-md-9 col-xs-12 card card-body"
 			>
 			@csrf
@@ -90,7 +91,7 @@
 					<div class="form-group">
 						<label for="location">Ubicación</label>
 						<input name="location"
-							id="location" 
+							id="location"
 						    class="form-control"
 						    placeholder="Av. Loreto número 12" 
 						>
@@ -105,9 +106,11 @@
 
 					<div class="form-group">
 						<label for="address">Dirección</label>
-						<input type="text" id="address" class="form-control @error('name') is-invalid @enderror"
-						placeholder="Av. Las Gardalias"
-						value="{{ old('address') }}">
+						<input type="text" id="address"
+                            name="address" 
+                            class="form-control @error('name') is-invalid @enderror"
+						  placeholder="Av. Las Gardalias"
+						  value="{{ old('address') }}">
 
                         @error('address')
                             <span class="invalid-feedback" role="alert">
@@ -145,7 +148,7 @@
                         <label for="descripcion">Descripción</label>
                         <textarea
                             class="form-control  @error('descripcion')  is-invalid  @enderror" 
-                            name="descripcion"
+                            name="description"
                         >{{ old('descripcion') }}</textarea>
 
                             @error('descripcion')
@@ -197,7 +200,9 @@
                 	</legend>
                 </fieldset>
 
-            	<input type="hidden" id="uuid" value="{{ Str::uuid()->toString() }}">
+            	<input type="hidden" id="uuid" name="uuid" value="{{ Str::uuid()->toString() }}">
+                {{-- <input type="hidden" name="user_id"
+                    value="1"> --}}
 				<input type="submit" class="btn btn-primary mt-3 d-block" value="Registrar">
 				
 			</form>

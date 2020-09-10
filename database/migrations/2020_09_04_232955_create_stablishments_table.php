@@ -16,7 +16,8 @@ class CreateStablishmentsTable extends Migration
         Schema::create('stablishments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('image');
+            $table->string('image')->nullable();
+            $table->string('location');
             $table->string('address');
             $table->string('latitud');
             $table->string('longitud');
@@ -26,7 +27,7 @@ class CreateStablishmentsTable extends Migration
             $table->time('close');
             $table->uuid('uuid');
             $table->foreignId('category_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->nullable();
             $table->timestamps();
         });
     }
