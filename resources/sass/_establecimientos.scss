@@ -5,7 +5,7 @@ body {
     background-color: $body-bg;
 }
 h1, h2, h3, h4 {
-    font-weight: 900;
+    font-weight: 800;
     color: $indigo;
 }
 
@@ -35,12 +35,12 @@ h1, h2, h3, h4 {
 
 .navbar.bg-white .navbar-brand{
     font-family: "Lato", sans-serif;
-    font-weight: 900;
-    font-size: 2rem;
+    font-weight: 600;
+    font-size: 1.5rem;
 }
 
 legend {
-    font-weight: 900;
+    font-weight: 800;
     font-size: 1rem;
     text-transform: uppercase;
     width: auto;
