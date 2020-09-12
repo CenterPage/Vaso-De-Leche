@@ -2071,6 +2071,69 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/showStablishment.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/showStablishment.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    getStablishment: function getStablishment() {
+      var _this = this;
+
+      var id = this.$route.params.id; // No olvides poner el "/" antes de cualquier URL porque sino coge todo el nombre de la otra URL
+
+      axios.get('/api/stablishments/' + id).then(function (response) {
+        _this.$store.commit('GET_STABLISHMENT', response.data);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getStablishment();
+  },
+  computed: {
+    stablishment: function stablishment() {
+      return this.$store.getters.getStablishment;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -51979,16 +52042,57 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container my-5" }, [
+    _c("h2", { staticClass: "text-center" }, [
+      _vm._v(_vm._s(_vm.stablishment.name))
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row align-items-start" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("img", {
+          staticStyle: { width: "400px" },
+          attrs: { src: "../storage/" + _vm.stablishment.image, alt: "" }
+        }),
+        _vm._v(" "),
+        _c("p", { staticClass: "mt-5" }, [
+          _vm._v(_vm._s(_vm.stablishment.description))
+        ])
+      ]),
+      _vm._v(" "),
+      _c("aside", { staticClass: "col-md-4 bg-primary" }, [
+        _c("div", {}),
+        _vm._v(" "),
+        _c("div", { staticClass: "text-center text-white mt-2 mb-4" }, [
+          _vm._v("\n\t\t\t\tMás información\n\t\t\t")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-white mt-1" }, [
+          _c("span", { staticClass: "font-weight-bold" }, [
+            _vm._v("Ubicación")
+          ]),
+          _vm._v("\n\t\t\t\t" + _vm._s(_vm.stablishment.address) + "\n\t\t\t")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-white mt-1" }, [
+          _c("span", { staticClass: "font-weight-bold" }, [_vm._v("Horario")]),
+          _vm._v(
+            "\n\t\t\t\t" +
+              _vm._s(_vm.stablishment.open) +
+              " - " +
+              _vm._s(_vm.stablishment.close) +
+              "\n\t\t\t"
+          )
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-white mt-1" }, [
+          _c("span", { staticClass: "font-weight-bold" }, [_vm._v("Telefono")]),
+          _vm._v("\n\t\t\t\t" + _vm._s(_vm.stablishment.phone) + "\n\t\t\t")
+        ])
+      ])
+    ])
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", {}, [_c("h1", [_vm._v("xDD")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -68841,15 +68945,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _showStablishment_vue_vue_type_template_id_6cd9cb9a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./showStablishment.vue?vue&type=template&id=6cd9cb9a& */ "./resources/js/components/showStablishment.vue?vue&type=template&id=6cd9cb9a&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _showStablishment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./showStablishment.vue?vue&type=script&lang=js& */ "./resources/js/components/showStablishment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _showStablishment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _showStablishment_vue_vue_type_template_id_6cd9cb9a___WEBPACK_IMPORTED_MODULE_0__["render"],
   _showStablishment_vue_vue_type_template_id_6cd9cb9a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -68863,6 +68969,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/components/showStablishment.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/showStablishment.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/showStablishment.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_showStablishment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./showStablishment.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/showStablishment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_showStablishment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -69078,7 +69198,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     ones: [],
-    twos: []
+    twos: [],
+    stablishments: []
   },
   mutations: {
     ADD_ONE: function ADD_ONE(state, one) {
@@ -69086,6 +69207,14 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     ADD_TWO: function ADD_TWO(state, two) {
       state.twos = two;
+    },
+    GET_STABLISHMENT: function GET_STABLISHMENT(state, stablishment) {
+      state.stablishments = stablishment;
+    }
+  },
+  getters: {
+    getStablishment: function getStablishment(state) {
+      return state.stablishments;
     }
   }
 }));

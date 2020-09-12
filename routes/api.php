@@ -7,5 +7,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/stablishments/{stablishment}', 'ApiController@show')->name('stablishments.show');
+
 Route::get('/categories', 'ApiController@getCategory')->name('categories.index');
 Route::get('/categories/{category}', 'ApiController@showCategory')->name('categories.show');

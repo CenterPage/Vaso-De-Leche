@@ -19,4 +19,9 @@ class ApiController extends Controller
     	$stablishments = Stablishment::with('Category')->where('category_id', $category->id)->take(2)->latest()->get();
     	return response()->json($stablishments);
     }
+
+    public function show(Stablishment $stablishment)
+    {
+        return response()->json($stablishment);
+    }
 }
