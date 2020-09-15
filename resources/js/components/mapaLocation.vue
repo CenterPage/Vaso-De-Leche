@@ -2,18 +2,25 @@
 	<div class="mapa">
 		<l-map :zoom="zoom" :center="center" :options="mapOptions">
 			<l-tile-layer :url="url" :attribution="attribution" />
+			<l-marker :lat-lng="{lat, lng}">
+				<l-tooltip>
+					{{ stablishment.name }}
+				</l-tooltip>
+			</l-marker>
 		</l-map>
 	</div>
 </template>
 
 <script>
 import { latLng } from 'leaflet';
-import { LMap, LTileLayer } from 'vue2-leaflet';
+import { LMap, LTileLayer, LMarker, LTooltip } from 'vue2-leaflet';
 
 export default {
 	components: {
 		LMap,
 		LTileLayer,
+		LMarker,
+		LTooltip,
 	},
 	data() {
     	return {
@@ -24,12 +31,29 @@ export default {
       		currentZoom: 11.5,
       		mapOptions: {
         	zoomSnap: 0.5
-        },
-      	showMap: true,
-      	lat: "",
-      	lng: ""
-    };
-  },
+	        },
+	      	showMap: true,
+	      	lat: "",
+	      	lng: ""
+    	}
+  	},
+	created() {
+		// console.log(this.lat);
+		// console.log(this.$store.getters.getStablishment.latitud);
+	  	setTimeout(() => {
+	  		this.lat = this.$store.getters.getStablishment.latitud;
+	  		this.lng = this.$store.getters.getStablishment.longitud;
+	  		this.center = latLng(this.lat, this.lng);
+	  	}, 300);
+	},
+	mounted() {
+		console.log(this.lat);
+	},
+	computed: {
+		stablishment() { // ones porque arriba iteramos con ese nombre
+			return this.$store.getters.getStablishment;
+		}
+	}
 }
 </script>
 

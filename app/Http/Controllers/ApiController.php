@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\photo;
 use App\Category;
 use App\Stablishment;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
+    public function index()
+    {
+        $stablishments = Stablishment::all();
+        return response()->json($stablishments);
+    }
+
     public function getCategory()
     {
     	$categories = Category::all();
@@ -22,6 +29,10 @@ class ApiController extends Controller
 
     public function show(Stablishment $stablishment)
     {
+        $photos = Photo::where('id_stablishment', $stablishment->uuid)->get();
+        // Inyecta las fotos
+        $stablishment->photos = $photos;
+
         return response()->json($stablishment);
     }
 }

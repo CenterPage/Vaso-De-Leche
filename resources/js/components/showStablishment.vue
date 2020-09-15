@@ -2,11 +2,15 @@
 	<div class="container my-5">
 		<h2 class="text-center">{{ stablishment.name }}</h2>
 		<div class="row align-items-start">
-			<div class="col-md-8">
+			<div class="col-md-8 order-2">
 				<img :src="`../storage/${stablishment.image}`" alt="" style="width: 400px;">
+				
 				<p class="mt-5">{{ stablishment.description }}</p>
+
+				<photo-stablishment></photo-stablishment>
+
 			</div>
-			<aside class="col-md-4 ">
+			<aside class="col-md-4 order-1">
 				<div class="">
 					<mapa-location></mapa-location>
 				</div>
@@ -33,9 +37,12 @@
 
 <script>
 import mapaLocation from './mapaLocation';
+import photoStablishment from './photoStablishment';
+
 export default {
 	components: {
-		mapaLocation
+		mapaLocation,
+		photoStablishment
 	},
 	methods: {
 		getStablishment() {

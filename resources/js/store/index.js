@@ -23,6 +23,9 @@ export default new Vuex.Store({
 	getters: {
 		getStablishment: state => {
 			return state.stablishments;
-		}
+		},
+		getPhotoStablishment: state => {
+			return state.stablishments.photos;
+		},
 	}
 });
