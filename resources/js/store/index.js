@@ -7,7 +7,8 @@ export default new Vuex.Store({
 	state: {
 		ones: [],
 		twos: [],
-		stablishments: [],
+		stablishments: {},
+		allStablishments: []
 	},
 	mutations: {
 		ADD_ONE(state, one) {
@@ -18,6 +19,9 @@ export default new Vuex.Store({
 		},
 		GET_STABLISHMENT(state, stablishment) {
 			state.stablishments = stablishment;
+		},
+		GET_ALL_STABLISHMENT(state, stablishments) {
+			state.allStablishments = stablishments;
 		}
 	},
 	getters: {
@@ -26,6 +30,9 @@ export default new Vuex.Store({
 		},
 		getPhotoStablishment: state => {
 			return state.stablishments.photos;
+		},
+		getAllStablishment: state => {
+			return state.allStablishments;
 		},
 	}
 });

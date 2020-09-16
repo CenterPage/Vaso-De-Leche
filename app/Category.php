@@ -13,6 +13,6 @@ class Category extends Model
 
     public function stablishments()
     {
-    	return $this->hasMany(Category::class);
+    	return $this->hasMany(Stablishment::class);
     }
 }

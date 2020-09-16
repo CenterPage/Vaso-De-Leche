@@ -11,7 +11,7 @@ class ApiController extends Controller
 {
     public function index()
     {
-        $stablishments = Stablishment::all();
+        $stablishments = Stablishment::with('category')->get();
         return response()->json($stablishments);
     }
 

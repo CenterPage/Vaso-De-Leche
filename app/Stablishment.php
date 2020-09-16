@@ -10,6 +10,6 @@ class Stablishment extends Model
 
     public function category()
     {
-    	return $this->belongsTo(Stablishment::class);
+    	return $this->belongsTo(Category::class);
     }
 }

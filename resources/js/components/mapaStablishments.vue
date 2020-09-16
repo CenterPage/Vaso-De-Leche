@@ -3,9 +3,16 @@
 		<l-map :zoom="zoom" :center="center" :options="mapOptions">
 			<l-tile-layer :url="url" :attribution="attribution" />
 
-			<l-marker :lat-lng="{lat, lng}">
+			<l-marker 
+				v-for="stablishment in AllStablishments"
+				:key="stablishment.id"
+				:lat-lng="getCordenadas(stablishment)"
+				:icon="IconStablishment(stablishment)"
+			>
 				<l-tooltip>
-					
+					<div>
+						{{ stablishment.name }} - {{ stablishment.category.name }}
+					</div>
 				</l-tooltip>
 			</l-marker>
 		</l-map>
@@ -39,6 +46,37 @@ export default {
 	      },
 	      showMap: true
 	    }
+	},
+	created() {
+		axios.get('/api/stablishments')
+			.then(response => {
+				this.$store.commit('GET_ALL_STABLISHMENT', response.data);
+			})
+            .catch(error => {
+                console.log(error)
+            })
+	},
+	computed: {
+		AllStablishments() {
+			return this.$store.getters.getAllStablishment;
+		}
+	},
+	methods: {
+		getCordenadas(stablishment) {
+			// console.log(stablishment)
+			return {
+				lat: stablishment.latitud,
+				lng: stablishment.longitud
+			}
+		},
+		IconStablishment(stablishment) {
+			// console.log(stablishment)
+			const { slug } = stablishment.category;
+			return L.icon ({
+				iconUrl: `img/iconos/${slug}.png`,
+				iconSize: [40, 50]
+			})
+		}
 	},
 }
 </script>

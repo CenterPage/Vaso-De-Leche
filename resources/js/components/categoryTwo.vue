@@ -30,9 +30,12 @@
     export default {
         methods: {
             getCategoryTwo() {
-                axios.get('api/categories/sint-recusandae-nostrum')
+                axios.get('api/categories/doctor')
                     .then(response => {
                         this.$store.commit('ADD_TWO', response.data);
+                    })
+                    .catch(error => {
+                        console.log(error)
                     })
             }
         },

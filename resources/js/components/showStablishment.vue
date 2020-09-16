@@ -52,6 +52,9 @@ export default {
 				.then(response => {
 					this.$store.commit('GET_STABLISHMENT', response.data);
 				})
+                .catch(error => {
+                    console.log(error)
+                })
 		}
 	},
 	mounted() {

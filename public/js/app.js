@@ -1941,8 +1941,10 @@ __webpack_require__.r(__webpack_exports__);
     getCategoryOne: function getCategoryOne() {
       var _this = this;
 
-      axios.get('api/categories/delectus-similique-minus').then(function (response) {
+      axios.get('api/categories/restaurante').then(function (response) {
         _this.$store.commit('ADD_ONE', response.data);
+      })["catch"](function (error) {
+        console.log(error);
       });
     }
   },
@@ -2001,8 +2003,10 @@ __webpack_require__.r(__webpack_exports__);
     getCategoryTwo: function getCategoryTwo() {
       var _this = this;
 
-      axios.get('api/categories/sint-recusandae-nostrum').then(function (response) {
+      axios.get('api/categories/doctor').then(function (response) {
         _this.$store.commit('ADD_TWO', response.data);
+      })["catch"](function (error) {
+        console.log(error);
       });
     }
   },
@@ -2151,6 +2155,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2175,6 +2186,37 @@ __webpack_require__.r(__webpack_exports__);
       },
       showMap: true
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/api/stablishments').then(function (response) {
+      _this.$store.commit('GET_ALL_STABLISHMENT', response.data);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  },
+  computed: {
+    AllStablishments: function AllStablishments() {
+      return this.$store.getters.getAllStablishment;
+    }
+  },
+  methods: {
+    getCordenadas: function getCordenadas(stablishment) {
+      // console.log(stablishment)
+      return {
+        lat: stablishment.latitud,
+        lng: stablishment.longitud
+      };
+    },
+    IconStablishment: function IconStablishment(stablishment) {
+      // console.log(stablishment)
+      var slug = stablishment.category.slug;
+      return L.icon({
+        iconUrl: "img/iconos/".concat(slug, ".png"),
+        iconSize: [40, 50]
+      });
+    }
   }
 });
 
@@ -2309,6 +2351,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/api/stablishments/' + id).then(function (response) {
         _this.$store.commit('GET_STABLISHMENT', response.data);
+      })["catch"](function (error) {
+        console.log(error);
       });
     }
   },
@@ -53586,14 +53630,34 @@ var render = function() {
             attrs: { url: _vm.url, attribution: _vm.attribution }
           }),
           _vm._v(" "),
-          _c(
-            "l-marker",
-            { attrs: { "lat-lng": { lat: _vm.lat, lng: _vm.lng } } },
-            [_c("l-tooltip")],
-            1
-          )
+          _vm._l(_vm.AllStablishments, function(stablishment) {
+            return _c(
+              "l-marker",
+              {
+                key: stablishment.id,
+                attrs: {
+                  "lat-lng": _vm.getCordenadas(stablishment),
+                  icon: _vm.IconStablishment(stablishment)
+                }
+              },
+              [
+                _c("l-tooltip", [
+                  _c("div", [
+                    _vm._v(
+                      "\n\t\t\t\t\t" +
+                        _vm._s(stablishment.name) +
+                        " - " +
+                        _vm._s(stablishment.category.name) +
+                        "\n\t\t\t\t"
+                    )
+                  ])
+                ])
+              ],
+              1
+            )
+          })
         ],
-        1
+        2
       )
     ],
     1
@@ -83408,7 +83472,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   state: {
     ones: [],
     twos: [],
-    stablishments: []
+    stablishments: {},
+    allStablishments: []
   },
   mutations: {
     ADD_ONE: function ADD_ONE(state, one) {
@@ -83419,6 +83484,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     GET_STABLISHMENT: function GET_STABLISHMENT(state, stablishment) {
       state.stablishments = stablishment;
+    },
+    GET_ALL_STABLISHMENT: function GET_ALL_STABLISHMENT(state, stablishments) {
+      state.allStablishments = stablishments;
     }
   },
   getters: {
@@ -83427,6 +83495,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     getPhotoStablishment: function getPhotoStablishment(state) {
       return state.stablishments.photos;
+    },
+    getAllStablishment: function getAllStablishment(state) {
+      return state.allStablishments;
     }
   }
 }));

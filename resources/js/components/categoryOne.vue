@@ -30,10 +30,13 @@
 	export default {
 		methods: {
 			getCategoryOne() {
-				axios.get('api/categories/delectus-similique-minus')
+				axios.get('api/categories/restaurante')
 					.then(response => {
 						this.$store.commit('ADD_ONE', response.data);
 					})
+                    .catch(error => {
+                        console.log(error)
+                    })
 			}
 		},
 		mounted() {
