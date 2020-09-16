@@ -13,3 +13,5 @@ Route::get('/stablishments/{stablishment}', 'ApiController@show')->name('stablis
 
 Route::get('/categories', 'ApiController@getCategory')->name('categories.index');
 Route::get('/categories/{category}', 'ApiController@showCategory')->name('categories.show');
+
+Route::get('/{category}', 'ApiController@stablishmentCategory')->name('categories');

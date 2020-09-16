@@ -8,6 +8,7 @@
 				:key="stablishment.id"
 				:lat-lng="getCordenadas(stablishment)"
 				:icon="IconStablishment(stablishment)"
+				@click="redirect(stablishment.id)"
 			>
 				<l-tooltip>
 					<div>
@@ -63,21 +64,30 @@ export default {
 	},
 	methods: {
 		getCordenadas(stablishment) {
-			// console.log(stablishment)
 			return {
 				lat: stablishment.latitud,
 				lng: stablishment.longitud
 			}
 		},
 		IconStablishment(stablishment) {
-			// console.log(stablishment)
 			const { slug } = stablishment.category;
 			return L.icon ({
 				iconUrl: `img/iconos/${slug}.png`,
 				iconSize: [40, 50]
 			})
+		},
+		redirect(id) {
+			this.$router.push({ name: 'establecimiento', params: { id: id } })
 		}
 	},
+	watch: {
+		"$store.state.category": function() {
+			axios.get('/api/' + this.$store.getters.getCategory)
+				.then(response => {
+					this.$store.commit('GET_ALL_STABLISHMENT', response.data);
+				})
+		}
+	}
 }
 </script>
 

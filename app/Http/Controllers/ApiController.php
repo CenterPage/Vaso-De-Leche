@@ -21,6 +21,14 @@ class ApiController extends Controller
     	return response()->json($categories);
     }
 
+    // Obtener las categoríasy mostrarlas en el mapa principal
+    public function stablishmentCategory(Category $category)
+    {
+        $stablishments = Stablishment::with('Category')->where('category_id', $category->id)->latest()->get();
+        return response()->json($stablishments);
+    }
+
+    // Obtener la categorías y mostrarlas en el mapa principal según su categoría. Ejm "Category One, Category Two"
     public function showCategory(Category $category)
     {
     	$stablishments = Stablishment::with('Category')->where('category_id', $category->id)->take(2)->latest()->get();

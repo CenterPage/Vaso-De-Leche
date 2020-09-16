@@ -1,9 +1,11 @@
 <template>
 	<div class="">
 		<nav class="d-flex flex-column flex-md-row container justify-md-center">
-			<a href=""
+			<a @click="selectAll">Todos</a>
+			<a 
 				v-for="category in allCategories"
 				:key="category.id"
+				@click="selectCategory(category)"
 			>
 				{{ category.name }}
 			</a>
@@ -22,6 +24,21 @@ export default {
 	computed: {
 		allCategories() {
 			return this.$store.getters.getAllCategories;
+		}
+	},
+	methods: {
+		selectCategory(category) {
+			this.$store.commit('SELECT_CATEGORY', category.slug);
+			// console.log(category.slug);
+		},
+		selectAll() {
+			axios.get('/api/stablishments')
+				.then(response => {
+					this.$store.commit('GET_ALL_STABLISHMENT', response.data);
+				})
+	            .catch(error => {
+	                console.log(error)
+	            })
 		}
 	}
 }
