@@ -39,20 +39,32 @@ class PhotoController extends Controller
 
     public function destroy(Request $request)
     {
-        $photo = $request->get('photo');
+        // Policy
+        // Lo cogemos de dropzone.js > removedfile > params
+        // las 3 líneas son solo para pasarle la instancia al policy
+        $photo = $request->get('uuid');
+        $establecimiento = Stablishment::where('uuid', $uuid)->first();
+        $this->authorize('delete', $establecimiento);
+
+        // Delete Photos
+        // Lo cogemos de dropzone.js > removedfile > params
+        $photo = $request->get('photo'); 
 
         // $respuesta = [
         //     'delete-photo' => $photo
         // ];
 
         if (File::exists('storage/' . $photo)) {
+            // Elimina del servidor
             File::delete('storage/' . $photo);
-        }
+            // Elimina de la DB
+            Photo::where('url', $photo)->delete();
 
-        $response = [
-            'message' => 'Foto eliminada',
-            'Photo'   => $photo
-        ];
+            $response = [
+                'message' => 'Foto eliminada',
+                'Photo'   => $photo,
+            ];
+        }
 
         Photo::where('url', $photo)->delete();
 

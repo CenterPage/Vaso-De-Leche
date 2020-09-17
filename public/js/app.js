@@ -83788,6 +83788,28 @@ document.addEventListener('DOMContentLoaded', function () {
       headers: {
         'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
       },
+      // Para mostrar las imagenes en la vista edit
+      init: function init() {
+        var _this = this;
+
+        var galery = document.querySelectorAll('.galery');
+
+        if (galery.length > 0) {
+          galery.forEach(function (image) {
+            var imagePublished = {};
+            imagePublished.size = 1;
+            imagePublished.name = image.value;
+            imagePublished.nameServer = image.value;
+
+            _this.options.addedfile.call(_this, imagePublished);
+
+            _this.options.thumbnail.call(_this, imagePublished, "/storage/".concat(imagePublished.name));
+
+            imagePublished.previewElement.classList.add('dz-success');
+            imagePublished.previewElement.classList.add('dz-complete');
+          });
+        }
+      },
       success: function success(file, response) {
         // console.log(response);
         file.nameServer = response.archivo;
@@ -83798,7 +83820,9 @@ document.addEventListener('DOMContentLoaded', function () {
       removedfile: function removedfile(file, response) {
         // console.log(file);
         var params = {
-          photo: file.nameServer
+          photo: file.nameServer,
+          uuid: document.querySelector('#uuid').value // Para que el Policy funcione
+
         };
         axios.post('/photos/destroy', params).then(function (response) {
           // console.log(response);
@@ -83825,84 +83849,85 @@ __webpack_require__.r(__webpack_exports__);
 
 var provider = new leaflet_geosearch__WEBPACK_IMPORTED_MODULE_0__["OpenStreetMapProvider"]();
 document.addEventListener('DOMContentLoaded', function () {
-  var lat = document.querySelector('#latitud').value === '' ? -5.1995471 : document.querySelector('#latitud').value;
-  var lng = document.querySelector('#longitud').value === '' ? -80.6227001 : document.querySelector('#longitud').value;
-  var mapa = L.map('mapa').setView([lat, lng], 16); // Eliminar pines previos
+  if (document.querySelector('#mapa')) {
+    var reubicarPin = function reubicarPin(marker) {
+      // Detectar movimiento del marker
+      marker.on('moveend', function (e) {
+        marker = e.target;
+        var posicion = marker.getLatLng(); // console.log(posicion);
+        // Centrar automaticamente
 
-  var markers = new L.FeatureGroup(mapa);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(mapa);
-  var marker; // agregar el pin
+        mapa.panTo(new L.LatLng(posicion.lat, posicion.lng)); // Reverse Geocoding, cuando el usuario reubica el pin
 
-  marker = new L.marker([lat, lng], {
-    draggable: true,
-    autoPan: true
-  }).addTo(mapa); // Agregar el pin a las capas
-
-  markers.addLayer(marker); //GeoCode Service
-
-  var geocodeService = L.esri.Geocoding.geocodeService(); // Buscador de direcciones
-
-  var buscador = document.querySelector('#location');
-  buscador.addEventListener('blur', buscarDireccion);
-  reubicarPin(marker);
-
-  function reubicarPin(marker) {
-    // Detectar movimiento del marker
-    marker.on('moveend', function (e) {
-      marker = e.target;
-      var posicion = marker.getLatLng(); // console.log(posicion);
-      // Centrar automaticamente
-
-      mapa.panTo(new L.LatLng(posicion.lat, posicion.lng)); // Reverse Geocoding, cuando el usuario reubica el pin
-
-      geocodeService.reverse().latlng(posicion, 16).run(function (error, resultado) {
-        // console.log(resultado.address);
-        marker.bindPopup(resultado.address.LongLabel);
-        marker.openPopup();
-        llenarInputs(resultado);
+        geocodeService.reverse().latlng(posicion, 16).run(function (error, resultado) {
+          // console.log(resultado.address);
+          marker.bindPopup(resultado.address.LongLabel);
+          marker.openPopup();
+          llenarInputs(resultado);
+        });
       });
-    });
-  }
+    };
 
-  function buscarDireccion(e) {
-    if (e.target.value.length > 1) {
-      provider.search({
-        query: e.target.value + ' Perú '
-      }).then(function (resultado) {
-        // console.log(resultado);
-        if (resultado[0]) {
-          // Limpiar pines previos
-          markers.clearLayers(); // Reverse Geocoding, cuando el usuario reubica el pin
+    var buscarDireccion = function buscarDireccion(e) {
+      if (e.target.value.length > 1) {
+        provider.search({
+          query: e.target.value + ' PER '
+        }).then(function (resultado) {
+          // console.log(resultado);
+          if (resultado[0]) {
+            // Limpiar pines previos
+            markers.clearLayers(); // Reverse Geocoding, cuando el usuario reubica el pin
 
-          geocodeService.reverse().latlng(resultado[0].bounds[0], 16).run(function (error, resultado) {
-            // console.log(resultado);
-            // Llenar los inputs
-            llenarInputs(resultado); // Centrar el mapa
+            geocodeService.reverse().latlng(resultado[0].bounds[0], 16).run(function (error, resultado) {
+              // console.log(resultado);
+              // Llenar los inputs
+              llenarInputs(resultado); // Centrar el mapa
 
-            mapa.setView(resultado.latlng); // Agregar el pin
+              mapa.setView(resultado.latlng); // Agregar el pin
 
-            marker = new L.marker(resultado.latlng, {
-              draggable: true,
-              autoPan: true
-            }).addTo(mapa); // Asignar el contenedor de markers y el nuevo pin
+              marker = new L.marker(resultado.latlng, {
+                draggable: true,
+                autoPan: true
+              }).addTo(mapa); // Asignar el contenedor de markers y el nuevo pin
 
-            markers.addLayer(marker); // Mover el pin
+              markers.addLayer(marker); // Mover el pin
 
-            reubicarPin(marker);
-          });
-        }
-      });
-    }
+              reubicarPin(marker);
+            });
+          }
+        });
+      } // console.log(e);
 
-    console.log(e);
-  }
+    };
 
-  function llenarInputs(resultado) {
-    document.querySelector('#address').value = resultado.address.Address;
-    document.querySelector('#latitud').value = resultado.latlng.lat;
-    document.querySelector('#longitud').value = resultado.latlng.lng;
+    var llenarInputs = function llenarInputs(resultado) {
+      document.querySelector('#address').value = resultado.address.Address;
+      document.querySelector('#latitud').value = resultado.latlng.lat;
+      document.querySelector('#longitud').value = resultado.latlng.lng;
+    };
+
+    var lat = document.querySelector('#latitud').value === '' ? -5.1995471 : document.querySelector('#latitud').value;
+    var lng = document.querySelector('#longitud').value === '' ? -80.6227001 : document.querySelector('#longitud').value;
+    var mapa = L.map('mapa').setView([lat, lng], 16); // Eliminar pines previos
+
+    var markers = new L.FeatureGroup(mapa);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(mapa);
+    var marker; // agregar el pin
+
+    marker = new L.marker([lat, lng], {
+      draggable: true,
+      autoPan: true
+    }).addTo(mapa); // Agregar el pin a las capas
+
+    markers.addLayer(marker); //GeoCode Service
+
+    var geocodeService = L.esri.Geocoding.geocodeService(); // Buscador de direcciones
+
+    var buscador = document.querySelector('#location');
+    buscador.addEventListener('blur', buscarDireccion);
+    reubicarPin(marker);
   }
 });
 

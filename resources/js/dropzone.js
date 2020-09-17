@@ -15,6 +15,26 @@ document.addEventListener('DOMContentLoaded', () => {
 				'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
 			},
 
+			// Para mostrar las imagenes en la vista edit
+			init: function () {
+				const galery = document.querySelectorAll('.galery');
+
+				if (galery.length > 0) {
+					galery.forEach(image => {
+						const imagePublished = {};
+						imagePublished.size = 1;
+						imagePublished.name = image.value;
+						imagePublished.nameServer = image.value;
+
+						this.options.addedfile.call(this, imagePublished);
+						this.options.thumbnail.call(this, imagePublished, `/storage/${imagePublished.name}`);
+
+						imagePublished.previewElement.classList.add('dz-success');
+						imagePublished.previewElement.classList.add('dz-complete');
+					})
+				}
+			},
+
 			success: function(file, response) {
 				// console.log(response);
 				file.nameServer = response.archivo;
@@ -29,7 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				// console.log(file);
 
 				const params = {
-					photo: file.nameServer
+					photo: file.nameServer,
+					uuid: document.querySelector('#uuid').value // Para que el Policy funcione
 				}
 
 				axios.post('/photos/destroy', params)
