@@ -15,8 +15,8 @@ class StablishmentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'verified']);
-        $this->middleware('check')->only('create');
+        $this->middleware(['auth'])->except('show');
+        // $this->middleware('check')->only('create'); // Mira en middleware y el kernel
     }
 
     public function index()
@@ -46,9 +46,9 @@ class StablishmentController extends Controller
         return back()->with('estado', 'Tu información se guardo con éxito');
     }
 
-    public function show(Stablishment $stablishment)
+    public function show(Stablishment $stablishment, Photo $photo)
     {
-        //
+        return view('stablishments.show', compact('stablishment'));
     }
 
     public function edit(Stablishment $stablishment)
@@ -68,7 +68,7 @@ class StablishmentController extends Controller
     public function update(StablishmentRequest $request, Stablishment $stablishment)
     {
         $this->authorize('update', $stablishment);
-        
+
         if( $request->hasFile('image') ) {
             Storage::delete($stablishment->image);
 

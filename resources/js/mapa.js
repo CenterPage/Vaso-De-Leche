@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// agregar el pin
 		marker = new L.marker([lat, lng], {
-			draggable: true,	
+			draggable: true,
 			autoPan: true
 		}).addTo(mapa);
 
@@ -27,7 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		markers.addLayer(marker);
 
 		//GeoCode Service
-		const geocodeService = L.esri.Geocoding.geocodeService();
+		const geocodeService = L.esri.Geocoding.geocodeService({
+	    	apikey: 'AAPK0b461b3fa1144846bbd5a45d0ce05763rj9TBVUVcfcM3Lw0mPl57EGofzrSEDoSzb6bA6rAWNAndeKAHYir9ULE66gdYeou' // replace with your api key - https://developers.arcgis.com
+	  	});
 
 		// Buscador de direcciones
 		const buscador = document.querySelector('#location');
@@ -48,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				mapa.panTo( new L.LatLng(posicion.lat, posicion.lng) );
 
 				// Reverse Geocoding, cuando el usuario reubica el pin
-				geocodeService.reverse().latlng(posicion, 16).run(function(error, resultado) {
+				geocodeService.reverse().latlng(posicion).run(function(error, resultado) {
 
 					// console.log(resultado.address);
 
@@ -87,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 								// Agregar el pin
 								marker = new L.marker(resultado.latlng, {
-									draggable: true,	
+									draggable: true,
 									autoPan: true
 								}).addTo(mapa);
 
@@ -101,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						}
 					})
 			}
-			
+
 			// console.log(e);
 		}
 

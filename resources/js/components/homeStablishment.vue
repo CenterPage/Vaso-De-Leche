@@ -1,9 +1,9 @@
 <template>
     <div class="">
-        <list-category></list-category>
         <mapa-stablishments></mapa-stablishments>
-        <categoryOne></categoryOne>
-        <categoryTwo></categoryTwo>
+        <list-category></list-category>
+<!--         <categoryOne></categoryOne>
+        <categoryTwo></categoryTwo> -->
     </div>
 </template>
 

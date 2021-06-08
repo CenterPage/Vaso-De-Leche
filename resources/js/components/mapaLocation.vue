@@ -47,7 +47,7 @@ export default {
 	  	}, 300);
 	},
 	mounted() {
-		console.log(this.lat);
+		console.log(this.$store.getters.getStablishment.latitud);
 	},
 	computed: {
 		stablishment() { // ones porque arriba iteramos con ese nombre

@@ -3,7 +3,7 @@
 		<l-map :zoom="zoom" :center="center" :options="mapOptions">
 			<l-tile-layer :url="url" :attribution="attribution" />
 
-			<l-marker 
+			<l-marker
 				v-for="stablishment in AllStablishments"
 				:key="stablishment.id"
 				:lat-lng="getCordenadas(stablishment)"

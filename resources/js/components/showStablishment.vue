@@ -4,7 +4,7 @@
 		<div class="row align-items-start">
 			<div class="col-md-8 order-2">
 				<img :src="`../storage/${stablishment.image}`" alt="" style="width: 400px;">
-				
+
 				<p class="mt-5">{{ stablishment.description }}</p>
 
 				<photo-stablishment></photo-stablishment>
@@ -50,6 +50,7 @@ export default {
 			// No olvides poner el "/" antes de cualquier URL porque sino coge todo el nombre de la otra URL
 			axios.get('/api/stablishments/' + id)
 				.then(response => {
+					console.log(response.data);
 					this.$store.commit('GET_STABLISHMENT', response.data);
 				})
                 .catch(error => {

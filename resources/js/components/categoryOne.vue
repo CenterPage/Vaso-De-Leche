@@ -30,7 +30,7 @@
 	export default {
 		methods: {
 			getCategoryOne() {
-				axios.get('api/categories/restaurante')
+				axios.get('api/categories/El Indio')
 					.then(response => {
 						this.$store.commit('ADD_ONE', response.data);
 					})

@@ -25,7 +25,7 @@
 				class="col-md-9 col-xs-12 card card-body"
 			>
 			@csrf
-			
+
 				<fieldset class="border p-4">
 					<legend class="text-primary">
 						Nombre, categoría e imagen
@@ -36,7 +36,7 @@
 						<input name="name"
 						    value="{{ old('name') }}"
 						    class="form-control @error('name') is-invalid @enderror"
-						    placeholder="Ejm. Hotel por el chikito" 
+						    placeholder="Ejm. Hotel por el chikito"
 						>
 
 
@@ -61,9 +61,9 @@
 									{{ old('category_id') == $category->id ? 'selected' : '' }}>
 									{{ $category->name }}
 								</option>
-								
+
 							@endforeach
-							
+
 						</select>
 
                         @error('category_id')
@@ -75,7 +75,7 @@
 
 					<div class="form-group">
 						<label for="image">Imagen</label>
-						<input name="image" type="file" 
+						<input name="image" type="file"
 						    value="{{ old('image') }}"
 						    class="form-control @error('image') is-invalid @enderror"
 						>
@@ -93,8 +93,8 @@
 						<input name="location"
 							id="location"
 						    class="form-control"
-                            value="{{ old('location') }}" 
-						    placeholder="Av. Loreto número 12" 
+                            value="{{ old('location') }}"
+						    placeholder="Av. Loreto número 12"
 						>
 						<p class="text-center mb-3 text-secondary">El asistente colocará una  dirección estimada, mueve el pin hacía el lugar correcto</p>
 					</div>
@@ -108,7 +108,7 @@
 					<div class="form-group">
 						<label for="address">Dirección</label>
 						<input type="text" id="address"
-                            name="address" 
+                            name="address"
                             class="form-control @error('name') is-invalid @enderror"
 						  placeholder="Av. Las Gardalias"
 						  value="{{ old('address') }}">
@@ -129,10 +129,10 @@
                 	<legend  class="text-primary">Información Establecimiento: </legend>
                     <div class="form-group">
                         <label for="phone">Teléfono</label>
-                        <input 
-                            type="tel" 
-                            class="form-control @error('phone')  is-invalid  @enderror" 
-                            id="phone" 
+                        <input
+                            type="tel"
+                            class="form-control @error('phone')  is-invalid  @enderror"
+                            id="phone"
                             placeholder="Teléfono Establecimiento"
                             name="phone"
                             value="{{ old('phone') }}"
@@ -148,7 +148,7 @@
                     <div class="form-group">
                         <label for="descripcion">Descripción</label>
                         <textarea
-                            class="form-control  @error('descripcion')  is-invalid  @enderror" 
+                            class="form-control  @error('descripcion')  is-invalid  @enderror"
                             name="description"
                         >{{ old('descripcion') }}</textarea>
 
@@ -161,10 +161,10 @@
 
                     <div class="form-group">
                         <label for="open">Hora Apertura:</label>
-                        <input 
-                            type="time" 
-                            class="form-control @error('open')  is-invalid  @enderror" 
-                            id="open" 
+                        <input
+                            type="time"
+                            class="form-control @error('open')  is-invalid  @enderror"
+                            id="open"
                             name="open"
                             value="{{ old('open') }}"
                         >
@@ -177,10 +177,10 @@
 
                     <div class="form-group">
                         <label for="close">Hora Cierre:</label>
-                        <input 
-                            type="time" 
-                            class="form-control @error('close')  is-invalid  @enderror" 
-                            id="close" 
+                        <input
+                            type="time"
+                            class="form-control @error('close')  is-invalid  @enderror"
+                            id="close"
                             name="close"
                             value="{{ old('close') }}"
                         >
@@ -205,7 +205,7 @@
                 {{-- <input type="hidden" name="user_id"
                     value="1"> --}}
 				<input type="submit" class="btn btn-primary mt-3 d-block" value="Registrar">
-				
+
 			</form>
 		</div>
 	</div>

@@ -17,7 +17,7 @@ class CreateStablishmentsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('image')->nullable();
-            $table->string('location');
+            $table->string('location')->nullable();
             $table->string('address');
             $table->string('latitud');
             $table->string('longitud');

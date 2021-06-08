@@ -1,4 +1,4 @@
-<template>
+1<template>
 <div class="container my-5">
         <h2>Categoría Dos</h2>
 

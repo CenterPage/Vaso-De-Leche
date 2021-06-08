@@ -29,7 +29,7 @@ class StablishmentRequest extends FormRequest
                 $this->route('stablishment') ? 'nullable' : 'required',
                 'mimes:jpeg,png',
             ],
-            'location' => 'required',
+            'location' => '',
             'address' => 'required',
             'latitud' => 'required',
             'longitud' => 'required',
