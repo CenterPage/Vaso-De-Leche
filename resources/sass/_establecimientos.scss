@@ -15,18 +15,22 @@ h1, h2, h3, h4 {
 
 
 .text-primary {
-    color: $indigo!important;
+    color: $indigo !important;
 }
 .navbar.bg-white {
-    background-color: $indigo!important;
+    background-color: $cyan !important;
 
     a {
-        color: white!important;
+        color: white !important;
     }
 }
 
 .navbar-nav .dropdown-menu {
-    background: $indigo;
+    background: $cyan;
+
+    a {
+        color: dark;
+    }
 
     a:hover {
         background: $indigo;

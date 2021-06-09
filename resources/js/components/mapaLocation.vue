@@ -14,7 +14,6 @@
 <script>
 import { latLng } from 'leaflet';
 import { LMap, LTileLayer, LMarker, LTooltip } from 'vue2-leaflet';
-
 export default {
 	components: {
 		LMap,
@@ -47,7 +46,7 @@ export default {
 	  	}, 300);
 	},
 	mounted() {
-		console.log(this.$store.getters.getStablishment.latitud);
+		console.log(this.lat);
 	},
 	computed: {
 		stablishment() { // ones porque arriba iteramos con ese nombre
@@ -59,7 +58,6 @@ export default {
 
 <style scoped="">
 	@import 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css';
-
 	.mapa {
 		height: 300px;
 		width: 100%;

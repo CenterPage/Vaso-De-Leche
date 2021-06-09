@@ -10917,7 +10917,7 @@ h4 {
 }
 
 .navbar.bg-white {
-  background-color: #6574cd !important;
+  background-color: #6cb2eb !important;
 }
 
 .navbar.bg-white a {
@@ -10925,7 +10925,11 @@ h4 {
 }
 
 .navbar-nav .dropdown-menu {
-  background: #6574cd;
+  background: #6cb2eb;
+}
+
+.navbar-nav .dropdown-menu a {
+  color: dark;
 }
 
 .navbar-nav .dropdown-menu a:hover {

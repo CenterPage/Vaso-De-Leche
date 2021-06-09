@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="">
     	<vue-page-transition name="fade-in-down">
     		<router-view></router-view>
     	</vue-page-transition>

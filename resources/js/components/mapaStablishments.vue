@@ -93,7 +93,7 @@ export default {
 
 <style scoped="">
 .mapa {
-	height: 70vh;
 	width: 100% !import;
+	height: 70vh;
 }
 </style>

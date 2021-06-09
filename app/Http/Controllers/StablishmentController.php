@@ -21,7 +21,8 @@ class StablishmentController extends Controller
 
     public function index()
     {
-        //
+        $stablishments = Stablishment::latest()->paginate(6);
+        return view('stablishments.index', compact('stablishments'));
     }
 
     public function create()
