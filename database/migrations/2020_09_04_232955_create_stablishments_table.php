@@ -15,18 +15,24 @@ class CreateStablishmentsTable extends Migration
     {
         Schema::create('stablishments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name'); // Nombre del comite vaso de leche
             $table->string('image')->nullable();
-            $table->string('location')->nullable();
-            $table->string('address');
+            $table->string('location')->nullable(); // Ignoralo
+            $table->string('address'); // direccion
+            $table->string('mz_lote'); // Manzana/Lote
             $table->string('latitud');
+            $table->integer('tipo_sector'); // Rural / Urbano
+            $table->string('name_presidenta');
+            $table->string('cargo');
+            $table->string('num_beneficiado');
+            $table->string('num_resolucion');
+            $table->date('fecha_emitido');
+            $table->date('fecha_vencimiento');
             $table->string('longitud');
             $table->string('phone');
-            $table->mediumText('description');
-            $table->time('open');
-            $table->time('close');
+            $table->mediumText('description')->nullable();
             $table->uuid('uuid');
-            $table->foreignId('category_id')->constrained();
+            $table->foreignId('category_id')->constrained(); // lugar(AA.HH Indio)
             $table->foreignId('user_id')->constrained()->nullable();
             $table->timestamps();
         });

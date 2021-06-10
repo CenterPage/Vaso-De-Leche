@@ -2228,7 +2228,7 @@ __webpack_require__.r(__webpack_exports__);
     }, 300);
   },
   mounted: function mounted() {
-    console.log(this.$store.getters.getStablishment.latitud);
+    console.log(this.lat);
   },
   computed: {
     stablishment: function stablishment() {
@@ -7077,7 +7077,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 exports.push([module.i, "@import url(https://unpkg.com/leaflet@1.7.1/dist/leaflet.css);", ""]);
 
 // module
-exports.push([module.i, "\n.mapa[data-v-2974afb6] {\n\twidth: 100%;\n\t/*height: 100%;*/\n}\n", ""]);
+exports.push([module.i, "\n.mapa[data-v-2974afb6] {\n\theight: 300px;\n\twidth: 100%;\n}\n", ""]);
 
 // exports
 
@@ -54051,7 +54051,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "mb-2" }, [
-      _c("h4", [_vm._v("Filtrar comites por lugar")])
+      _c("h4", [_vm._v("Filtrar comites por sector")])
     ])
   }
 ]

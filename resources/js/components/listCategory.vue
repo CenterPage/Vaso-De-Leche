@@ -2,7 +2,7 @@
 	<div class="container mt-4">
 		<nav class="d-flex flex-column justify-content-center">
             <div class="mb-2">
-                <h4>Filtrar comites por lugar</h4>
+                <h4>Filtrar comites por sector</h4>
             </div>
             <div class="d-flex flex-wrap overflow-auto">
     			<a class="mt-1" @click="selectAll">Todos</a>

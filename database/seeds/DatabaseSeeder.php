@@ -19,23 +19,23 @@ class DatabaseSeeder extends Seeder
 
         // factory(Category::class, 5)->create();
         DB::table('categories')->insert([
-            'name' => 'El Indio',
-            'slug' => 'hotel'
+            'name' => 'Asoc. 04 de Mayo',
+            'slug' => 'indio'
         ]);
 
         DB::table('categories')->insert([
-            'name' => 'Campo Polo',
-            'slug' => 'hotel'
+            'name' => 'A.H. Campo Polo',
+            'slug' => 'indio-2'
         ]);
 
         DB::table('categories')->insert([
-            'name' => 'Alas Peruanas',
-            'slug' => 'hotel'
+            'name' => 'A.H. El Indio',
+            'slug' => 'indio-3'
         ]);
 
         DB::table('categories')->insert([
-            'name' => 'Enase',
-            'slug' => 'hotel'
+            'name' => 'A.H. Nuevo Horizonte',
+            'slug' => 'indio-4'
         ]);
     }
 }

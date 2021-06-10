@@ -42,7 +42,7 @@ class StablishmentController extends Controller
 
         $stablishment->save();
 
-        StablismentSaved::dispatch($stablishment);
+        // StablismentSaved::dispatch($stablishment);
 
         return back()->with('estado', 'Tu información se guardo con éxito');
     }
@@ -55,10 +55,6 @@ class StablishmentController extends Controller
     public function edit(Stablishment $stablishment)
     {
         $categories = Category::all();
-
-        //  En algunos navegadores la hora sale "10:00:00" y en otros "10:00". Entonces con este código oblogamos a que sea "10:00"
-        $stablishment->open = date('H:i', strtotime($stablishment->open));
-        $stablishment->close = date('H:i', strtotime($stablishment->close));
 
         // Obtener imagenes establecimiento
         $images = Photo::where('id_stablishment', $stablishment->uuid)->get();
