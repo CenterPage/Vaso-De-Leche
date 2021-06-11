@@ -70,6 +70,7 @@ export default {
 			}
 		},
 		IconStablishment(stablishment) {
+			// console.log(stablishment.category.name);
 			const { slug } = stablishment.category;
 			return L.icon ({
 				iconUrl: `img/iconos/${slug}.png`,
@@ -77,7 +78,8 @@ export default {
 			})
 		},
 		redirect(id) {
-			this.$router.push({ name: 'establecimiento', params: { id: id } })
+			// this.$router.push({ name: 'establecimiento', params: { id: id } })
+			this.$router.push(`/stablishments/${id}`)
 		}
 	},
 	watch: {

@@ -1,25 +1,46 @@
 <template>
 	<div class="container mt-4">
 		<nav class="d-flex flex-column justify-content-center">
-            <div class="mb-2">
+            <div>
                 <h4>Filtrar comites por sector</h4>
             </div>
-            <div class="d-flex flex-wrap overflow-auto">
-    			<a class="mt-1" @click="selectAll">Todos</a>
-    			<a class="mt-1"
-    				v-for="category in allCategories"
-    				:key="category.id"
-    				@click="selectCategory(category)"
-    			>
-    				{{ category.name }}
-    			</a>
+            <div style="width:100%;margin:20px auto;height:75px;">
+                <slider ref="slider" :options="options" >
+                    <div data-v-4ec34587="" class="slider-item" style="background-color: red; width: 23.5%; margin-right: 1%; border-radius: 5px;">
+                        <h5 class="cursor" @click="selectAll" href="#">Mostrar Todo</h5>
+                    </div>
+                   <!-- slideritem wrapped package with the components you need -->
+                    <slideritem v-for="(item,index) in allCategories" :key="index" style="background-color: red; width: 23.5%; margin-right: 1%; border-radius: 5px">
+                        <h5 class="cursor" @click="selectCategory(item)">{{item.name}}</h5>
+                    </slideritem>
+                   <!-- Customizable loading -->
+                    <div slot="loading">loading...</div>
+                </slider>
             </div>
 		</nav>
 	</div>
 </template>
 
 <script>
+import { slider, slideritem } from 'vue-concise-slider'
 export default {
+    data() {
+        return {
+            options: {
+               currentPage: 0,
+               tracking: false,
+               thresholdDistance: 100,
+               thresholdTime: 300,
+               infinite: 4,
+               slidesToScroll: 4,
+               loop: true
+            }
+        }
+    },
+    components: {
+        slider,
+        slideritem
+    },
 	created() {
 		axios.get('/api/categories')
 		    .then(response => {
@@ -50,17 +71,21 @@ export default {
 </script>
 
 <style scoped>
-div {
-  /*background-color: #6272d4;*/
+.slider-item {
+    font-size: 15px !important;
+}
+.cursor {
+    cursor: pointer;
+    color: white !important;
 }
 nav a {
-  color: rgba(55, 65, 81, 1) !important;
+  color: white !important;
   font-weight: bold;
   text-transform: uppercase;
   padding: 0.5rem 2rem;
   text-align: center;
   flex: 1;
-  background-color: rgba(209, 213, 219, .6);
+  /*background-color: rgba(209, 213, 219, .6);*/
   border-radius: 4px;
   margin-left: 2px;
   margin-right: 2px;
