@@ -2174,7 +2174,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     selectCategory: function selectCategory(category) {
-      this.$store.commit('SELECT_CATEGORY', category.slug); // console.log(category.slug);
+      this.$store.commit('SELECT_CATEGORY', category.slug);
+      console.log(category.slug);
     },
     selectAll: function selectAll() {
       var _this2 = this;
@@ -7084,7 +7085,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.slider-item[data-v-4ec34587] {\r\n    font-size: 15px !important;\n}\n.cursor[data-v-4ec34587] {\r\n    cursor: pointer;\r\n    color: white !important;\n}\nnav a[data-v-4ec34587] {\r\n  color: white !important;\r\n  font-weight: bold;\r\n  text-transform: uppercase;\r\n  padding: 0.5rem 2rem;\r\n  text-align: center;\r\n  flex: 1;\r\n  /*background-color: rgba(209, 213, 219, .6);*/\r\n  border-radius: 4px;\r\n  margin-left: 2px;\r\n  margin-right: 2px;\n}\nnav a[data-v-4ec34587]:hover {\r\n  color: white;\r\n  cursor: pointer;\n}\r\n/*nav a:nth-child(1) {\r\n  background-color: #a011b7;\r\n}\r\nnav a:nth-child(2) {\r\n  background-color: #591d03;\r\n}\r\nnav a:nth-child(3) {\r\n  background-color: #ea6a00;\r\n}\r\nnav a:nth-child(4) {\r\n  background-color: #edb220;\r\n}\r\nnav a:nth-child(5) {\r\n  background-color: #dd0e3f;\r\n}\r\nnav a:nth-child(6) {\r\n  background-color: #0448b5;\r\n}\r\nnav a:nth-child(7) {\r\n  background-color: #00a81c;\r\n}*/\r\n", ""]);
+exports.push([module.i, "\n.slider-item[data-v-4ec34587] {\r\n    font-size: 15px !important;\n}\n.cursor[data-v-4ec34587] {\r\n    cursor: pointer;\r\n    color: white !important;\n}\nnav a[data-v-4ec34587] {\r\n    color: white !important;\r\n    font-weight: bold;\r\n    text-transform: uppercase;\r\n    padding: 0.5rem 2rem;\r\n    text-align: center;\r\n    flex: 1;\r\n    /*background-color: rgba(209, 213, 219, .6);*/\r\n    border-radius: 4px;\r\n    margin-left: 2px;\r\n    margin-right: 2px;\n}\nnav a[data-v-4ec34587]:hover {\r\n    color: white;\r\n    cursor: pointer;\n}\r\n/*nav a:nth-child(1) {\r\n  background-color: #a011b7;\r\n}\r\nnav a:nth-child(2) {\r\n  background-color: #591d03;\r\n}\r\nnav a:nth-child(3) {\r\n  background-color: #ea6a00;\r\n}\r\nnav a:nth-child(4) {\r\n  background-color: #edb220;\r\n}\r\nnav a:nth-child(5) {\r\n  background-color: #dd0e3f;\r\n}\r\nnav a:nth-child(6) {\r\n  background-color: #0448b5;\r\n}\r\nnav a:nth-child(7) {\r\n  background-color: #00a81c;\r\n}*/\r\n", ""]);
 
 // exports
 
@@ -7141,7 +7142,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.mapa[data-v-7a299e41] {\r\n\twidth: 100% !import;\r\n\theight: 70vh;\n}\r\n", ""]);
+exports.push([module.i, "\n.mapa[data-v-7a299e41] {\r\n\twidth: 100% !import;\r\n\theight: 60vh;\n}\r\n", ""]);
 
 // exports
 

@@ -9,11 +9,11 @@
                     <div data-v-4ec34587="" class="slider-item" style="background-color: red; width: 23.5%; margin-right: 1%; border-radius: 5px;">
                         <h5 class="cursor" @click="selectAll" href="#">Mostrar Todo</h5>
                     </div>
-                   <!-- slideritem wrapped package with the components you need -->
+                    <!-- slideritem wrapped package with the components you need -->
                     <slideritem v-for="(item,index) in allCategories" :key="index" style="background-color: red; width: 23.5%; margin-right: 1%; border-radius: 5px">
                         <h5 class="cursor" @click="selectCategory(item)">{{item.name}}</h5>
                     </slideritem>
-                   <!-- Customizable loading -->
+                    <!-- Customizable loading -->
                     <div slot="loading">loading...</div>
                 </slider>
             </div>
@@ -27,13 +27,13 @@ export default {
     data() {
         return {
             options: {
-               currentPage: 0,
-               tracking: false,
-               thresholdDistance: 100,
-               thresholdTime: 300,
-               infinite: 4,
-               slidesToScroll: 4,
-               loop: true
+                currentPage: 0,
+                tracking: false,
+                thresholdDistance: 100,
+                thresholdTime: 300,
+                infinite: 4,
+                slidesToScroll: 4,
+                loop: true
             }
         }
     },
@@ -55,7 +55,7 @@ export default {
 	methods: {
 		selectCategory(category) {
 			this.$store.commit('SELECT_CATEGORY', category.slug);
-			// console.log(category.slug);
+			console.log(category.slug);
 		},
 		selectAll() {
 			axios.get('/api/stablishments')
@@ -79,20 +79,20 @@ export default {
     color: white !important;
 }
 nav a {
-  color: white !important;
-  font-weight: bold;
-  text-transform: uppercase;
-  padding: 0.5rem 2rem;
-  text-align: center;
-  flex: 1;
-  /*background-color: rgba(209, 213, 219, .6);*/
-  border-radius: 4px;
-  margin-left: 2px;
-  margin-right: 2px;
+    color: white !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0.5rem 2rem;
+    text-align: center;
+    flex: 1;
+    /*background-color: rgba(209, 213, 219, .6);*/
+    border-radius: 4px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 nav a:hover {
-  color: white;
-  cursor: pointer;
+    color: white;
+    cursor: pointer;
 }
 /*nav a:nth-child(1) {
   background-color: #a011b7;
