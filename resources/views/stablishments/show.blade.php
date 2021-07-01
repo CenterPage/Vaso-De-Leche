@@ -5,10 +5,14 @@
         <h2 class="text-center">Comite {{ $stablishment->name }}</h2>
         <div class="row align-items-start">
             <div class="col-md-8 order-2">
-                <img src="../storage/{{ $stablishment->image }}" alt="" style="width: 400px;">
+                <img class="mb-4" src="../storage/{{ $stablishment->image }}" alt="" style="width: 400px;">
 
-                <p>Hola! <br>   Mi nombre es <span class="font-weight-bold text-secondary">{{ $stablishment->name_presidenta }}</span> y soy la presidenta del comite vaso de leche <span class="font-weight-bold text-secondary">{{ $stablishment->name }}</span>. Junto a la Municipalidad Distrital de Castilla y mi equipo podemos llegar a  <span class="font-weight-bold text-secondary">{{ $stablishment->num_beneficiado }} beneficiados</span>
-                </p>
+                <h2 >Información</h2>
+                <span><strong class="text-secondary">Presidenta:</strong> {{ $stablishment->name_presidenta }}</span><br>
+                <span><strong class="text-secondary">Beneficiados:</strong> {{ $stablishment->num_beneficiado }}</span><br>
+                <span><strong class="text-secondary">N. Resolución:</strong> {{ $stablishment->num_resolucion }}</span><br>
+                <span><strong class="text-secondary">Fecha Emitido:</strong> {{ $stablishment->fecha_emitido }}</span><br>
+                <span><strong class="text-secondary">Fecha Vencimiento:</strong> {{ $stablishment->fecha_vencimiento }}</span>
 
                 <p class="mt-5">{{ $stablishment->description }}</p>
 

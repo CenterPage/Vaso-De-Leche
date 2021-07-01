@@ -31,6 +31,8 @@
         "leaflet": "^1.7.1",
         "leaflet-geosearch": "^3.0.6",
         "vue-router": "^3.4.3",
+        "vue-slick": "^1.1.16",
+        "vue-slick-carousel": "^1.0.6",
         "vue2-leaflet": "^2.5.2"
     }
 }

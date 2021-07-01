@@ -4,36 +4,40 @@
             <div>
                 <h4>Filtrar comites por sector</h4>
             </div>
-            <div style="width:100%;margin:20px auto;height:75px;">
+            <div style="width:100%;margin:20px auto;height:100px;">
                 <slider ref="slider" :options="options" >
                     <div data-v-4ec34587="" class="slider-item" style="background-color: red; width: 23.5%; margin-right: 1%; border-radius: 5px;">
                         <h5 class="cursor" @click="selectAll" href="#">Mostrar Todo</h5>
                     </div>
-                    <!-- slideritem wrapped package with the components you need -->
+
                     <slideritem v-for="(item,index) in allCategories" :key="index" style="background-color: red; width: 23.5%; margin-right: 1%; border-radius: 5px">
                         <h5 class="cursor" @click="selectCategory(item)">{{item.name}}</h5>
                     </slideritem>
-                    <!-- Customizable loading -->
+
                     <div slot="loading">loading...</div>
                 </slider>
             </div>
+
 		</nav>
 	</div>
 </template>
 
 <script>
 import { slider, slideritem } from 'vue-concise-slider'
+
 export default {
     data() {
         return {
             options: {
-                currentPage: 0,
-                tracking: false,
-                thresholdDistance: 100,
-                thresholdTime: 300,
-                infinite: 4,
-                slidesToScroll: 4,
-                loop: true
+                // currentPage: 0,
+                // tracking: false,
+                // thresholdDistance: 100,
+                // thresholdTime: 300,
+                // infinite: 4,
+                // slidesToScroll: 4,
+                // loop: true,
+                // autoplay: '1000',
+                pagination: false,
             }
         }
     },
@@ -53,6 +57,14 @@ export default {
 		}
 	},
 	methods: {
+          slideTo () {
+            this.$refs.slider.$emit('slideTo', num)
+          },
+
+          slideNext () {
+            this.$refs.slider.$emit('slideNext')
+          },
+
 		selectCategory(category) {
 			this.$store.commit('SELECT_CATEGORY', category.slug);
 			console.log(category.slug);
