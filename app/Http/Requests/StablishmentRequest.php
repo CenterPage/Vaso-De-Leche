@@ -25,10 +25,11 @@ class StablishmentRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'image' => [
-                $this->route('stablishment') ? 'nullable' : 'required',
-                'mimes:jpeg,png',
-            ],
+            'image' => 'nullable',
+            // [
+            //     $this->route('stablishment') ? 'nullable' : 'required',
+            //     'mimes:jpeg,png',
+            // ],
             'location' => 'nullable',
             'address' => 'required',
             'mz_lote' => 'required',

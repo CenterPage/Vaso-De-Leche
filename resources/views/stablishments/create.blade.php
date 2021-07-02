@@ -17,9 +17,9 @@
 
 @section('content')
 	<div class="container">
-		<h1 class="text-center ">Registrar Comite</h1>
+		<h1 class="text-center mt-4">Registrar Comité</h1>
 
-		<div class="mt-5 row justify-content-center">
+		<div class="mt-4 row justify-content-center">
 			<form action="{{ route('stablishments.store') }}"
                 method="POST" enctype="multipart/form-data"
 				class="col-md-9 col-xs-12 card card-body"
@@ -28,11 +28,11 @@
 
 				<fieldset class="border p-4">
 					<legend class="text-primary">
-						Nombre comite, sector e imagen
+						Nombre comité y sector
 					</legend>
 
 					<div class="form-group">
-						<label for="name">Nombre Comite</label>
+						<label for="name">Nombre Comité</label>
 						<input name="name"
 						    value="{{ old('name') }}"
 						    class="form-control @error('name') is-invalid @enderror"
@@ -75,7 +75,7 @@
                         @enderror
 					</div>
 
-					<div class="form-group">
+{{-- 					<div class="form-group">
 						<label for="image">Imagen</label>
 						<input name="image" type="file"
 						    value="{{ old('image') }}"
@@ -88,7 +88,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-					</div>
+					</div> --}}
 
 					<div class="form-group d-none">
 						<label for="location">Ubicación</label>
@@ -143,7 +143,7 @@
 				</fieldset>
 
 				<fieldset class="border p-4 mt-5">
-                	<legend  class="text-primary">Información Comite: </legend>
+                	<legend  class="text-primary">Información Comité: </legend>
                     <div class="form-group">
                         <label for="name_presidenta">Nombre Presidenta</label>
                         <input class="form-control @error('name_presidenta') is-invalid  @enderror"
@@ -292,14 +292,14 @@
 
             	</fieldset>
 
-				<fieldset class="border p-4 mt-5">
-                	<legend  class="text-primary">Imagenes Comite: </legend>
+{{-- 				<fieldset class="border p-4 mt-5">
+                	<legend  class="text-primary">Imagenes Comité: </legend>
                     <div class="form-group">
                     	<label for="image">Imagenes</label>
                     	<div id="dropzone" class="dropzone form-control"></div>
                     </div>
                 	</legend>
-                </fieldset>
+                </fieldset> --}}
 
             	<input type="hidden" id="uuid" name="uuid" value="{{ Str::uuid()->toString() }}">
                 {{-- <input type="hidden" name="user_id"

@@ -2,6 +2,10 @@
 
 @section('content')
 <div class="container">
+    <div class="d-flex justify-content-around align-items-center m-4">
+        <h4>Listado de Comites</h4>
+        <a class="btn btn-primary" href="{{ route('stablishments.create') }}">Nuevo</a>
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>

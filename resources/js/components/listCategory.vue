@@ -1,11 +1,12 @@
 <template>
-	<div class="container mt-4">
+	<div class="container mt-4 mb-4">
 		<nav class="d-flex flex-column justify-content-center">
-            <div>
-                <h4>Filtrar comites por sector</h4>
+            <div class="d-flex justify-content-center flex-column align-items-center mb-3">
+                <h4>Filtrar comités por sector</h4>
+                <input class="form-control col-md-4" type="text" v-model="search" placeholder="Ejemplo: A.H. El Indio">
             </div>
-            <div style="width:100%;margin:20px auto;height:100px;">
-                <slider ref="slider" :options="options" >
+            <div class="d-flex justify-content-center flex-wrap">
+<!--                 <slider ref="slider" :options="options" >
                     <div data-v-4ec34587="" class="slider-item" style="background-color: red; width: 23.5%; margin-right: 1%; border-radius: 5px;">
                         <h5 class="cursor" @click="selectAll" href="#">Mostrar Todo</h5>
                     </div>
@@ -15,7 +16,20 @@
                     </slideritem>
 
                     <div slot="loading">loading...</div>
-                </slider>
+                </slider> -->
+                <div class="form-check form-check-inline border p-2 mt-1">
+                    <input class="form-check-input cursor" type="radio" name="exampleRadios" id="exampleRadios1" value="option2" checked @click="selectAll">
+                    <label class="form-check-label text-secondary cursor deed" for="exampleRadios1">
+                        Todos
+                    </label>
+                </div>
+
+                <div class="form-check form-check-inline p-2 border mt-1" v-for="(item,index) in filteredPacks" :key="index">
+                    <input class="form-check-input cursor" type="radio" name="exampleRadios" :id="index" value="option1" @click="selectCategory(item)">
+                    <label class="form-check-label text-secondary cursor deed" :for="index">
+                        {{item.name}}
+                    </label>
+                </div>
             </div>
 
 		</nav>
@@ -23,11 +37,12 @@
 </template>
 
 <script>
-import { slider, slideritem } from 'vue-concise-slider'
+// import { slider, slideritem } from 'vue-concise-slider'
 
 export default {
     data() {
         return {
+            search: '',
             options: {
                 // currentPage: 0,
                 // tracking: false,
@@ -41,10 +56,10 @@ export default {
             }
         }
     },
-    components: {
-        slider,
-        slideritem
-    },
+    // components: {
+    //     slider,
+    //     slideritem
+    // },
 	created() {
 		axios.get('/api/categories')
 		    .then(response => {
@@ -54,20 +69,17 @@ export default {
 	computed: {
 		allCategories() {
 			return this.$store.getters.getAllCategories;
-		}
+		},
+        filteredPacks: function(){
+          return this.$store.getters.getAllCategories.filter((item) => {
+            return item.name.toLowerCase().match(this.search);
+          })
+        }
 	},
 	methods: {
-          slideTo () {
-            this.$refs.slider.$emit('slideTo', num)
-          },
-
-          slideNext () {
-            this.$refs.slider.$emit('slideNext')
-          },
-
 		selectCategory(category) {
 			this.$store.commit('SELECT_CATEGORY', category.slug);
-			console.log(category.slug);
+			// console.log(category.slug);
 		},
 		selectAll() {
 			axios.get('/api/stablishments')
@@ -86,9 +98,18 @@ export default {
 .slider-item {
     font-size: 15px !important;
 }
+.border {
+    border: 1px solid red;
+    border-radius: 4px;
+}
+.border:hover {
+    background-color: #6cb2eb !important;
+}
+.deed:hover {
+    color: white !important;
+}
 .cursor {
     cursor: pointer;
-    color: white !important;
 }
 nav a {
     color: white !important;
