@@ -23,7 +23,7 @@
 			</div>
 			<aside class="col-md-4 order-1">
 				<div class="">
-					<mapa-location></mapa-location>
+					<mapa-location-show :stablishment="stablishment"></mapa-location-show>
 				</div>
 				<div class="text-center text-white mt-2 mb-4 bg-primary p-2">
 					<h4 class="text-white">MÁS INFORMACIÓN</h4>
@@ -52,7 +52,8 @@
 
 <script>
 import mapaLocation from './mapaLocation';
-import photoStablishment from './photoStablishment';
+import mapaLocationShow from './mapaLocationShow';
+// import photoStablishment from './photoStablishment';
 
 export default {
     data() {
@@ -62,7 +63,8 @@ export default {
     },
 	components: {
 		mapaLocation,
-		photoStablishment
+		// photoStablishment
+		mapaLocationShow
 	},
 	methods: {
 		getStablishment() {
@@ -70,7 +72,7 @@ export default {
 			// No olvides poner el "/" antes de cualquier URL porque sino coge todo el nombre de la otra URL
 			axios.get('/api/stablishments/' + id)
 				.then(response => {
-					// console.log(response.data[0].category.name);
+					// console.log(response.data[0]);
 					this.lugar = response.data[0].category.name;
 					this.$store.commit('GET_STABLISHMENT', response.data[0]);
 				})
