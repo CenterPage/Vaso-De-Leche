@@ -7,8 +7,10 @@
 				<!-- <img class="mb-4" :src="`../storage/${stablishment.image}`" alt="" style="width: 400px;"> -->
 
 				<h2 >INFORMACIÓN</h2>
-				<span><strong class="text-secondary">Comité: </strong>{{ stablishment.name }}</span><br>
-				<span><strong class="text-secondary">Presidenta: </strong>{{ stablishment.name_presidenta }}</span><br>
+				<span><strong class="text-secondary">Comité: </strong>{{ stablishment.name }}</span>
+				<br>
+				<span><strong class="text-secondary">Presidenta: </strong>{{ stablishment.name_presidenta }}</span>
+				<br>
 				<span><strong class="text-secondary">Beneficiados: </strong>{{ stablishment.num_beneficiado }}</span><br>
 				<span><strong class="text-secondary">N. Resolución: </strong>{{ stablishment.num_resolucion }}</span><br>
 				<span><strong class="text-secondary">Fecha Emitido: </strong>{{ stablishment.fecha_emitido }}</span><br>
@@ -27,7 +29,7 @@
 					<h4 class="text-white">MÁS INFORMACIÓN</h4>
 					<p class="text-white m-0">
 						<span class="font-weight-bold">Lugar:</span>
-						{{ stablishment.category.name }}
+						{{ this.lugar }}
 					</p>
 					<p class="text-white m-0">
 						<span class="font-weight-bold">Ubicación:</span>
@@ -53,6 +55,11 @@ import mapaLocation from './mapaLocation';
 import photoStablishment from './photoStablishment';
 
 export default {
+    data() {
+        return {
+            lugar: '',
+        }
+    },
 	components: {
 		mapaLocation,
 		photoStablishment
@@ -63,7 +70,8 @@ export default {
 			// No olvides poner el "/" antes de cualquier URL porque sino coge todo el nombre de la otra URL
 			axios.get('/api/stablishments/' + id)
 				.then(response => {
-					// console.log(response.data[0]);
+					// console.log(response.data[0].category.name);
+					this.lugar = response.data[0].category.name;
 					this.$store.commit('GET_STABLISHMENT', response.data[0]);
 				})
                 .catch(error => {

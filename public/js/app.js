@@ -2629,9 +2629,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      lugar: ''
+    };
+  },
   components: {
     mapaLocation: _mapaLocation__WEBPACK_IMPORTED_MODULE_0__["default"],
     photoStablishment: _photoStablishment__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -2643,7 +2650,9 @@ __webpack_require__.r(__webpack_exports__);
       var id = this.$route.params.id; // No olvides poner el "/" antes de cualquier URL porque sino coge todo el nombre de la otra URL
 
       axios.get('/api/stablishments/' + id).then(function (response) {
-        // console.log(response.data[0]);
+        // console.log(response.data[0].category.name);
+        _this.lugar = response.data[0].category.name;
+
         _this.$store.commit('GET_STABLISHMENT', response.data[0]);
       })["catch"](function (error) {
         console.log(error);
@@ -54543,6 +54552,7 @@ var render = function() {
           _c("strong", { staticClass: "text-secondary" }, [_vm._v("Comité: ")]),
           _vm._v(_vm._s(_vm.stablishment.name))
         ]),
+        _vm._v(" "),
         _c("br"),
         _vm._v(" "),
         _c("span", [
@@ -54551,6 +54561,7 @@ var render = function() {
           ]),
           _vm._v(_vm._s(_vm.stablishment.name_presidenta))
         ]),
+        _vm._v(" "),
         _c("br"),
         _vm._v(" "),
         _c("span", [
@@ -54605,11 +54616,7 @@ var render = function() {
               _c("span", { staticClass: "font-weight-bold" }, [
                 _vm._v("Lugar:")
               ]),
-              _vm._v(
-                "\n\t\t\t\t\t" +
-                  _vm._s(_vm.stablishment.category.name) +
-                  "\n\t\t\t\t"
-              )
+              _vm._v("\n\t\t\t\t\t" + _vm._s(this.lugar) + "\n\t\t\t\t")
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "text-white m-0" }, [
