@@ -2271,7 +2271,7 @@ __webpack_require__.r(__webpack_exports__);
       _this.lat = _this.$store.getters.getStablishment.latitud;
       _this.lng = _this.$store.getters.getStablishment.longitud;
       _this.center = Object(leaflet__WEBPACK_IMPORTED_MODULE_0__["latLng"])(_this.lat, _this.lng);
-    }, 300);
+    }, 1000);
   },
   mounted: function mounted() {
     console.log(this.lat);
@@ -2347,7 +2347,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    // console.log(this.stablishment);
+    console.log(this.stablishment);
     setTimeout(function () {
       _this.lat = _this.stablishment.latitud;
       _this.lng = _this.stablishment.longitud;
@@ -2535,7 +2535,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mapaLocation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mapaLocation */ "./resources/js/components/mapaLocation.vue");
-/* harmony import */ var _mapaLocationShow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mapaLocationShow */ "./resources/js/components/mapaLocationShow.vue");
+/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
+/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue2_leaflet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue2-leaflet */ "./node_modules/vue2-leaflet/dist/vue2-leaflet.es.js");
 //
 //
 //
@@ -2588,21 +2590,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
  // import photoStablishment from './photoStablishment';
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      lugar: ''
+      lugar: '',
+      stablishmentes: {}
     };
   },
   components: {
-    mapaLocation: _mapaLocation__WEBPACK_IMPORTED_MODULE_0__["default"],
-    // photoStablishment
-    mapaLocationShow: _mapaLocationShow__WEBPACK_IMPORTED_MODULE_1__["default"]
+    mapaLocation: _mapaLocation__WEBPACK_IMPORTED_MODULE_0__["default"] // photoStablishment
+
   },
   methods: {
+    IconStablishment: function IconStablishment() {
+      return L.icon({
+        iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+        iconSize: [20, 30]
+      });
+    },
     getStablishment: function getStablishment() {
       var _this = this;
 
@@ -2611,6 +2622,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/stablishments/' + id).then(function (response) {
         // console.log(response.data[0]);
         _this.lugar = response.data[0].category.name;
+        var establishmentes = response.data[0];
 
         _this.$store.commit('GET_STABLISHMENT', response.data[0]);
       })["catch"](function (error) {
@@ -54460,16 +54472,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("aside", { staticClass: "col-md-4 order-1" }, [
-        _c(
-          "div",
-          {},
-          [
-            _c("mapa-location-show", {
-              attrs: { stablishment: _vm.stablishment }
-            })
-          ],
-          1
-        ),
+        _c("div", {}, [_c("mapa-location")], 1),
         _vm._v(" "),
         _c(
           "div",
@@ -54483,7 +54486,7 @@ var render = function() {
               _c("span", { staticClass: "font-weight-bold" }, [
                 _vm._v("Lugar:")
               ]),
-              _vm._v("\n\t\t\t\t\t" + _vm._s(this.lugar) + "\n\t\t\t\t")
+              _vm._v("\n\t\t\t\t\t\t" + _vm._s(this.lugar) + "\n\t\t\t\t\t")
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "text-white m-0" }, [
@@ -54491,7 +54494,9 @@ var render = function() {
                 _vm._v("Ubicación:")
               ]),
               _vm._v(
-                "\n\t\t\t\t\t" + _vm._s(_vm.stablishment.address) + "\n\t\t\t\t"
+                "\n\t\t\t\t\t\t" +
+                  _vm._s(_vm.stablishment.address) +
+                  "\n\t\t\t\t\t"
               )
             ]),
             _vm._v(" "),
@@ -54500,7 +54505,9 @@ var render = function() {
                 _vm._v("Mz / Lote:")
               ]),
               _vm._v(
-                "\n\t\t\t\t\t" + _vm._s(_vm.stablishment.mz_lote) + "\n\t\t\t\t"
+                "\n\t\t\t\t\t\t" +
+                  _vm._s(_vm.stablishment.mz_lote) +
+                  "\n\t\t\t\t\t"
               )
             ]),
             _vm._v(" "),
@@ -54509,7 +54516,9 @@ var render = function() {
                 _vm._v("Teléfono:")
               ]),
               _vm._v(
-                "\n\t\t\t\t\t" + _vm._s(_vm.stablishment.phone) + "\n\t\t\t\t"
+                "\n\t\t\t\t\t\t" +
+                  _vm._s(_vm.stablishment.phone) +
+                  "\n\t\t\t\t\t"
               )
             ])
           ]

@@ -47,7 +47,7 @@ export default {
         },
     },
     created() {
-        // console.log(this.stablishment);
+        console.log(this.stablishment);
         setTimeout(() => {
             this.lat = this.stablishment.latitud;
             this.lng = this.stablishment.longitud;

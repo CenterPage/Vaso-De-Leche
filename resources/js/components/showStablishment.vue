@@ -22,9 +22,11 @@
 
 			</div>
 			<aside class="col-md-4 order-1">
-				<div class="">
-					<mapa-location-show :stablishment="stablishment"></mapa-location-show>
-				</div>
+
+                <div class="">
+                    <mapa-location></mapa-location>
+                </div>
+
 				<div class="text-center text-white mt-2 mb-4 bg-primary p-2">
 					<h4 class="text-white">MÁS INFORMACIÓN</h4>
 					<p class="text-white m-0">
@@ -52,21 +54,28 @@
 
 <script>
 import mapaLocation from './mapaLocation';
-import mapaLocationShow from './mapaLocationShow';
 // import photoStablishment from './photoStablishment';
+import { latLng } from 'leaflet';
+import { LMap, LTileLayer, LMarker, LTooltip } from 'vue2-leaflet';
 
 export default {
     data() {
         return {
             lugar: '',
+            stablishmentes: {},
         }
     },
 	components: {
 		mapaLocation,
 		// photoStablishment
-		mapaLocationShow
-	},
+    },
 	methods: {
+        IconStablishment() {
+            return L.icon ({
+                iconUrl: `https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png`,
+                iconSize: [20, 30]
+            })
+        },
 		getStablishment() {
 			const { id } = this.$route.params;
 			// No olvides poner el "/" antes de cualquier URL porque sino coge todo el nombre de la otra URL
@@ -74,6 +83,7 @@ export default {
 				.then(response => {
 					// console.log(response.data[0]);
 					this.lugar = response.data[0].category.name;
+					let establishmentes = response.data[0];
 					this.$store.commit('GET_STABLISHMENT', response.data[0]);
 				})
                 .catch(error => {
@@ -91,3 +101,4 @@ export default {
 	}
 }
 </script>
+
