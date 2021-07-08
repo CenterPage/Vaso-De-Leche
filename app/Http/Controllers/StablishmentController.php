@@ -36,7 +36,7 @@ class StablishmentController extends Controller
 
         $stablishment = new Stablishment( $request->validated() );
 
-        $stablishment->image = $request->file('image')->store('principales', 'public');
+        // $stablishment->image = $request->file('image')->store('principales', 'public');
 
         $stablishment->user_id = auth()->id();
 
@@ -66,19 +66,19 @@ class StablishmentController extends Controller
     {
         $this->authorize('update', $stablishment);
 
-        if( $request->hasFile('image') ) {
-            Storage::delete($stablishment->image);
+        // if( $request->hasFile('image') ) {
+        //     Storage::delete($stablishment->image);
 
-            $stablishment->fill( $request->validated() );
+        //     $stablishment->fill( $request->validated() );
 
-            $stablishment->image = $request->file('image')->store('principales');
+        //     $stablishment->image = $request->file('image')->store('principales');
 
-            $stablishment->save();
+        //     $stablishment->save();
 
             // stablishmentSaved::dispatch($stablishment);
-        } else {
+        // } else {
             $stablishment->update( array_filter($request->validated()) );
-        }
+        // }
 
         return back()->with('estado', 'El establecimiento fue actualizaco con éxito!');
     }

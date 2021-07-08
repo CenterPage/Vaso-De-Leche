@@ -2271,7 +2271,7 @@ __webpack_require__.r(__webpack_exports__);
       _this.lat = _this.$store.getters.getStablishment.latitud;
       _this.lng = _this.$store.getters.getStablishment.longitud;
       _this.center = Object(leaflet__WEBPACK_IMPORTED_MODULE_0__["latLng"])(_this.lat, _this.lng);
-    }, 1000);
+    }, 500);
   },
   mounted: function mounted() {
     console.log(this.lat);
