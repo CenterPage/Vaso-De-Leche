@@ -25,7 +25,7 @@
                 <div class="">
                     <mapa-location-show :stablishment="{{ $stablishment }}"></mapa-location-show>
                 </div>
-                <div class="text-center text-white mt-2 mb-4 bg-primary p-2">
+                <div class="text-center text-white mt-2 mb-4 bg-verde p-2">
                     <h4 class="text-white">MÁS INFORMACIÓN</h4>
                     <p class="text-white m-0">
                         <span class="font-weight-bold">Lugar:</span>

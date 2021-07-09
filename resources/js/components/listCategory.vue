@@ -103,7 +103,7 @@ export default {
     border-radius: 4px;
 }
 .border:hover {
-    background-color: #6cb2eb !important;
+    background-color: rgba(16, 185, 129, 1) !important;
 }
 .deed:hover {
     color: white !important;

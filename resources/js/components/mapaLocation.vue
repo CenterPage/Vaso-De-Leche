@@ -43,7 +43,7 @@ export default {
 	  		this.lat = this.$store.getters.getStablishment.latitud;
 	  		this.lng = this.$store.getters.getStablishment.longitud;
 	  		this.center = latLng(this.lat, this.lng);
-	  	}, 500);
+	  	}, 1000);
 	},
 	mounted() {
 		console.log(this.lat);

@@ -2271,7 +2271,7 @@ __webpack_require__.r(__webpack_exports__);
       _this.lat = _this.$store.getters.getStablishment.latitud;
       _this.lng = _this.$store.getters.getStablishment.longitud;
       _this.center = Object(leaflet__WEBPACK_IMPORTED_MODULE_0__["latLng"])(_this.lat, _this.lng);
-    }, 500);
+    }, 1000);
   },
   mounted: function mounted() {
     console.log(this.lat);
@@ -7093,7 +7093,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.slider-item[data-v-4ec34587] {\r\n    font-size: 15px !important;\n}\n.border[data-v-4ec34587] {\r\n    border: 1px solid red;\r\n    border-radius: 4px;\n}\n.border[data-v-4ec34587]:hover {\r\n    background-color: #6cb2eb !important;\n}\n.deed[data-v-4ec34587]:hover {\r\n    color: white !important;\n}\n.cursor[data-v-4ec34587] {\r\n    cursor: pointer;\n}\nnav a[data-v-4ec34587] {\r\n    color: white !important;\r\n    font-weight: bold;\r\n    text-transform: uppercase;\r\n    padding: 0.5rem 2rem;\r\n    text-align: center;\r\n    flex: 1;\r\n    /*background-color: rgba(209, 213, 219, .6);*/\r\n    border-radius: 4px;\r\n    margin-left: 2px;\r\n    margin-right: 2px;\n}\nnav a[data-v-4ec34587]:hover {\r\n    color: white;\r\n    cursor: pointer;\n}\r\n/*nav a:nth-child(1) {\r\n  background-color: #a011b7;\r\n}\r\nnav a:nth-child(2) {\r\n  background-color: #591d03;\r\n}\r\nnav a:nth-child(3) {\r\n  background-color: #ea6a00;\r\n}\r\nnav a:nth-child(4) {\r\n  background-color: #edb220;\r\n}\r\nnav a:nth-child(5) {\r\n  background-color: #dd0e3f;\r\n}\r\nnav a:nth-child(6) {\r\n  background-color: #0448b5;\r\n}\r\nnav a:nth-child(7) {\r\n  background-color: #00a81c;\r\n}*/\r\n", ""]);
+exports.push([module.i, "\n.slider-item[data-v-4ec34587] {\r\n    font-size: 15px !important;\n}\n.border[data-v-4ec34587] {\r\n    border: 1px solid red;\r\n    border-radius: 4px;\n}\n.border[data-v-4ec34587]:hover {\r\n    background-color: rgba(16, 185, 129, 1) !important;\n}\n.deed[data-v-4ec34587]:hover {\r\n    color: white !important;\n}\n.cursor[data-v-4ec34587] {\r\n    cursor: pointer;\n}\nnav a[data-v-4ec34587] {\r\n    color: white !important;\r\n    font-weight: bold;\r\n    text-transform: uppercase;\r\n    padding: 0.5rem 2rem;\r\n    text-align: center;\r\n    flex: 1;\r\n    /*background-color: rgba(209, 213, 219, .6);*/\r\n    border-radius: 4px;\r\n    margin-left: 2px;\r\n    margin-right: 2px;\n}\nnav a[data-v-4ec34587]:hover {\r\n    color: white;\r\n    cursor: pointer;\n}\r\n/*nav a:nth-child(1) {\r\n  background-color: #a011b7;\r\n}\r\nnav a:nth-child(2) {\r\n  background-color: #591d03;\r\n}\r\nnav a:nth-child(3) {\r\n  background-color: #ea6a00;\r\n}\r\nnav a:nth-child(4) {\r\n  background-color: #edb220;\r\n}\r\nnav a:nth-child(5) {\r\n  background-color: #dd0e3f;\r\n}\r\nnav a:nth-child(6) {\r\n  background-color: #0448b5;\r\n}\r\nnav a:nth-child(7) {\r\n  background-color: #00a81c;\r\n}*/\r\n", ""]);
 
 // exports
 
@@ -54476,7 +54476,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "text-center text-white mt-2 mb-4 bg-primary p-2" },
+          { staticClass: "text-center text-white mt-2 mb-4 bg-verde p-2" },
           [
             _c("h4", { staticClass: "text-white" }, [
               _vm._v("MÁS INFORMACIÓN")

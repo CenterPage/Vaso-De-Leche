@@ -47,12 +47,12 @@ class ApiController extends Controller
     // showStablishment
     public function show(Stablishment $stablishment)
     {
-        $photos = Photo::where('id_stablishment', $stablishment->uuid)->get();
+        // $photos = Photo::where('id_stablishment', $stablishment->uuid)->get();
 
         $stablishments = Stablishment::with('category')->where('category_id', $stablishment->category_id)->get();
 
         // Inyecta las fotos
-        $stablishments->photos = $photos;
+        // $stablishments->photos = $photos;
 
         return response()->json($stablishments);
     }
