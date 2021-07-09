@@ -57,9 +57,9 @@ class StablishmentController extends Controller
         $categories = Category::all();
 
         // Obtener imagenes establecimiento
-        $images = Photo::where('id_stablishment', $stablishment->uuid)->get();
+        // $images = Photo::where('id_stablishment', $stablishment->uuid)->get();
 
-        return view('stablishments.edit', compact('categories', 'stablishment', 'images'));
+        return view('stablishments.edit', compact('categories', 'stablishment'));
     }
 
     public function update(StablishmentRequest $request, Stablishment $stablishment)
@@ -80,11 +80,13 @@ class StablishmentController extends Controller
             $stablishment->update( array_filter($request->validated()) );
         // }
 
-        return back()->with('estado', 'El establecimiento fue actualizaco con éxito!');
+        return back()->with('estado', 'El comité fue actualizaco con éxito!');
     }
 
     public function destroy(Stablishment $stablishment)
     {
-        //
+        $stablishment->delete();
+
+        return redirect()->route('stablishments.index')->with('estado', 'El comité fue eliminado.');
     }
 }

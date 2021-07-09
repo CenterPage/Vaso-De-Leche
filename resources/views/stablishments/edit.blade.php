@@ -25,10 +25,10 @@
 				class="col-md-9 col-xs-12 card card-body"
 			>
 			@csrf @method('PUT')
-			
+
 				<fieldset class="border p-4">
 					<legend class="text-primary">
-						Nombre, categoría e imagen
+						Nombre Comité y categoría
 					</legend>
 
 					<div class="form-group">
@@ -36,7 +36,7 @@
 						<input name="name"
 						    value="{{ old('name', $stablishment->name) }}"
 						    class="form-control @error('name') is-invalid @enderror"
-						    placeholder="Ejm. Hotel por el chikito" 
+						    placeholder="Ejm. Hotel por el chikito"
 						>
 
 
@@ -61,9 +61,9 @@
 									{{ old('category_id', $stablishment->category_id) == $category->id ? 'selected' : '' }}>
 									{{ $category->name }}
 								</option>
-								
+
 							@endforeach
-							
+
 						</select>
 
                         @error('category_id')
@@ -73,9 +73,9 @@
                         @enderror
 					</div>
 
-					<div class="form-group">
+{{-- 					<div class="form-group">
 						<label for="image">Imagen</label>
-						<input name="image" type="file" 
+						<input name="image" type="file"
 						    value="{{ old('image') }}"
 						    class="form-control @error('image') is-invalid @enderror"
 						>
@@ -88,15 +88,15 @@
                         @enderror
 
                         <img src="/storage/{{ $stablishment->image }}" alt="" style="width: 200px; margin-top: 15px;">
-					</div>
+					</div> --}}
 
-					<div class="form-group">
+					<div class="form-group d-none">
 						<label for="location">Ubicación</label>
 						<input name="location"
 							id="location"
 						    class="form-control"
-                            value="{{ old('location', $stablishment->location) }}" 
-						    placeholder="Av. Loreto número 12" 
+                            value="{{ old('location', $stablishment->location) }}"
+						    placeholder="Av. Loreto número 12"
 						>
 						<p class="text-center mb-3 text-secondary">El asistente colocará una  dirección estimada, mueve el pin hacía el lugar correcto</p>
 					</div>
@@ -110,7 +110,7 @@
 					<div class="form-group">
 						<label for="address">Dirección</label>
 						<input type="text" id="address"
-                            name="address" 
+                            name="address"
                             class="form-control @error('name') is-invalid @enderror"
 						  placeholder="Av. Las Gardalias"
 						  value="{{ old('address', $stablishment->address) }}">
@@ -122,19 +122,151 @@
                         @enderror
 					</div>
 
+                    <div class="form-group">
+                        <label for="mz_lote">Mz / Lote</label>
+                        <input type="text" id="mz_lote"
+                            name="mz_lote"
+                            class="form-control @error('name') is-invalid @enderror"
+                          placeholder="Ejm. MZ Q LT 14"
+                          value="{{ old('mz_lote', $stablishment->mz_lote) }}">
+
+                        @error('mz_lote')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
 					<input type="hidden" id="latitud" name="latitud" value="{{ old('latitud', $stablishment->latitud) }}">
 					<input type="hidden" id="longitud" name="longitud" value="{{ old('longitud', $stablishment->longitud) }}">
 
 				</fieldset>
 
 				<fieldset class="border p-4 mt-5">
-                	<legend  class="text-primary">Imagenes Establecimiento: </legend>
+                	<legend  class="text-primary">INFORMACIÓN COMITÉ</legend>
+                    <div class="form-group">
+                        <label for="name_presidenta">Nombre Presidenta</label>
+                        <input class="form-control @error('name_presidenta') is-invalid  @enderror"
+                            type="text"
+                            id="name_presidenta"
+                            placeholder="Ejm. Julia Zapata"
+                            name="name_presidenta"
+                            value="{{ old('name_presidenta', $stablishment->name_presidenta) }}"
+                        >
+
+                            @error('name_presidenta')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="cargo">Cargo</label>
+                        <input name="cargo"
+                            value="{{ old('cargo', $stablishment->cargo) }}"
+                            class="form-control @error('cargo') is-invalid @enderror"
+                            placeholder="Ejm. Presidenta"
+                        >
+
+                        @error('cargo')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="num_beneficiado">N. Beneficiados</label>
+                        <input class="form-control @error('num_beneficiado') is-invalid  @enderror"
+                            type="text"
+                            id="num_beneficiado"
+                            placeholder="Ejm. 60"
+                            name="num_beneficiado"
+                            value="{{ old('num_beneficiado', $stablishment->num_beneficiado) }}"
+                        >
+
+                            @error('num_beneficiado')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="num_resolucion">N. Resolución</label>
+                        <input class="form-control @error('num_resolucion') is-invalid  @enderror"
+                            type="text"
+                            id="num_resolucion"
+                            placeholder="Ejm. 0255"
+                            name="num_resolucion"
+                            value="{{ old('num_resolucion', $stablishment->num_resolucion) }}"
+                        >
+
+                            @error('num_resolucion')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha_emitido">Fecha Emitido</label>
+                        <input class="form-control @error('fecha_emitido') is-invalid  @enderror"
+                            type="date"
+                            min="2018-01-01" max="2030-12-31" required
+                            id="fecha_emitido"
+                            name="fecha_emitido"
+                            value="{{ $stablishment->fecha_emitido }}"
+                        >
+
+                            @error('fecha_emitido')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha_vencimiento">Fecha Vencimiento</label>
+                        <input class="form-control @error('fecha_vencimiento') is-invalid  @enderror"
+                            type="date"
+                            min="2018-01-01" max="2030-12-31" required
+                            id="fecha_vencimiento"
+                            name="fecha_vencimiento"
+                            value="{{ $stablishment->fecha_vencimiento }}"
+                        >
+
+                            @error('fecha_vencimiento')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo_sector">Tipo Sector</label>
+
+
+                        <select class="form-control" name="tipo_sector">
+                            <option value="1"
+                                {{ old('tipo_sector', $stablishment->tipo_sector) == 1 ? 'selected' : '' }}
+                            >
+                                RURAL
+                            </option>
+                            <option value="2"
+                                {{ old('tipo_sector', $stablishment->tipo_sector) == 2 ? 'selected' : '' }}
+                            >
+                                URBANO
+                            </option>
+                        </select>
+
+                        @error('tipo_sector')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                     <div class="form-group">
                         <label for="phone">Teléfono</label>
-                        <input 
-                            type="tel" 
-                            class="form-control @error('phone')  is-invalid  @enderror" 
-                            id="phone" 
+                        <input
+                            type="tel"
+                            class="form-control @error('phone')  is-invalid  @enderror"
+                            id="phone"
                             placeholder="Teléfono Establecimiento"
                             name="phone"
                             value="{{ old('phone', $stablishment->phone) }}"
@@ -150,7 +282,7 @@
                     <div class="form-group">
                         <label for="description">Descripción</label>
                         <textarea
-                            class="form-control  @error('description')  is-invalid  @enderror" 
+                            class="form-control  @error('description')  is-invalid  @enderror"
                             name="description"
                         >
                         	{{ old('description', $stablishment->description) }}
@@ -163,40 +295,9 @@
                             @enderror
                     </div>
 
-                    <div class="form-group">
-                        <label for="open">Hora Apertura:</label>
-                        <input 
-                            type="time" 
-                            class="form-control @error('open')  is-invalid  @enderror" 
-                            id="open" 
-                            name="open"
-                            value="{{ old('open', $stablishment->open) }}"
-                        >
-                        @error('open')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="close">Hora Cierre:</label>
-                        <input 
-                            type="time" 
-                            class="form-control @error('close')  is-invalid  @enderror" 
-                            id="close" 
-                            name="close"
-                            value="{{ old('close', $stablishment->close) }}"
-                        >
-                        @error('close')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                        @enderror
-                    </div>
             	</fieldset>
 
-				<fieldset class="border p-4 mt-5">
+{{-- 				<fieldset class="border p-4 mt-5">
                 	<legend  class="text-primary">Información Establecimiento: </legend>
                     <div class="form-group">
                     	<label for="image">Imagenes</label>
@@ -210,12 +311,12 @@
                 		@endforeach
                 	@endif
 
-                </fieldset>
+                </fieldset> --}}
 
             	<input type="hidden" id="uuid" name="uuid" value="{{ $stablishment->uuid }}">
 
 				<input type="submit" class="btn btn-primary mt-3 d-block" value="Guardar Cambios">
-				
+
 			</form>
 		</div>
 	</div>

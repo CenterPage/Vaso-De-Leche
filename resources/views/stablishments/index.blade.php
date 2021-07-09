@@ -17,8 +17,8 @@
                 <th scope="col">Presidenta</th>
                 <th scope="col">Beneficiados</th>
                 <th scope="col">Teléfono</th>
-                <th scope="col">Número Resolución</th>
                 <th scope="col">Fecha Emitido/Venc.</th>
+                <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -38,8 +38,25 @@
                 <td>{{ $stablishment->name_presidenta }}</td>
                 <td>{{ $stablishment->num_beneficiado }}</td>
                 <td>{{ $stablishment->phone }}</td>
-                <td>{{ $stablishment->num_resolucion }}</td>
                 <td>{{ $stablishment->fecha_emitido }} / {{ $stablishment->fecha_vencimiento }}</td>
+                <td>
+                    <div class="d-flex">
+                        <a href="{{ route('stablishments.edit', $stablishment) }}" data-toggle="tooltip" data-placement="top" title="Editar" class="text-warning mr-2">
+                            @include('icons.icon-edit')
+                        </a>
+
+                        <form method="POST" action="{{ route('stablishments.destroy', $stablishment) }}"
+                                style="display: inline;">
+                                {{ csrf_field() }} {{ method_field('DELETE') }}
+                            <button class="btn btn-xs btn-link p-0 m-0"
+                              onclick="return confirm('¿Estás seguro de eliminarlo?')" data-toggle="tooltip" data-placement="top" title="Eliminar">
+
+                              @include('icons.icon-delete')
+
+                            </button>
+                        </form>
+                    </div>
+                </td>
             </tr>
         @endforeach
         </tbody>
