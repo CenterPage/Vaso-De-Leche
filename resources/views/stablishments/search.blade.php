@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container">
-    <div class="d-flex justify-content-between align-items-center m-4">
+    <div class="d-flex justify-content-around align-items-center m-4">
         <h4 class="mt-1"><a href="{{ route('stablishments.index') }}">Listado de Comites</a></h4>
-        <a class="btn btn-navbar bg-primary text-white" href="{{ route('stablishments.create') }}">Nuevo</a>
+        <<a class="btn btn-navbar bg-primary text-white" href="{{ route('stablishments.create') }}">Nuevo</a>
     </div>
     <div class="d-flex justify-content-center mb-3">
         <form action="{{ route('search.comite') }}" class="form-inline">
